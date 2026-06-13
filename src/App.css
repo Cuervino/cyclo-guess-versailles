@@ -37,6 +37,24 @@
   width: 256px;
   height: 256px;
 }
+/* The 100 spots scattered over the backdrop, very discreet. Same positioning as
+   .landing-tiles so the pixel coords (computed in JS) line up with the map. */
+.landing-markers {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.landing-marker {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: rgba(255, 122, 0, 0.55);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+}
 /* Darken the left (where the text panel sits) and let the map breathe on the
    right, plus a slight overall dim so the CyclOSM colors don't fight the UI. */
 .landing-scrim {
@@ -64,11 +82,11 @@
   backdrop-filter: blur(4px);
 }
 .landing-logo {
-  width: 72px;
-  height: 72px;
-  border-radius: 14px;
+  width: 92px;
+  height: 92px;
+  border-radius: 16px;
   background: #fff;
-  padding: 6px;
+  padding: 7px;
   object-fit: contain;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
@@ -87,6 +105,20 @@
   flex-direction: column;
   /* gap between sentences is larger than the in-sentence line spacing */
   gap: 9px;
+}
+/* Inline external link inside the lead (GeoGuessr), with the new-tab arrow. */
+.lead-link {
+  color: #e6e7ea;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+.lead-link:hover {
+  color: #fff;
+}
+.lead-link .ext-icon {
+  margin-left: 2px;
+  vertical-align: -1px;
 }
 .landing-chips {
   display: flex;
@@ -641,21 +673,35 @@ button.ghost {
   color: #1a5;
   text-decoration: none;
 }
+/* Resize grip: a dark chip with a diagonal double-arrow in the top-left corner
+   (the map grows toward the top-left from its bottom-right anchor). Always
+   visible (so the affordance reads), brighter on hover. */
 .resize-handle {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 6px;
+  left: 6px;
   width: 24px;
   height: 24px;
   z-index: 2;
   cursor: nwse-resize;
-  opacity: 0;
-  transition: opacity 0.18s ease;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0 42%, transparent 42%);
-  border-bottom-right-radius: 8px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(13, 14, 18, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  opacity: 0.8;
+  transition: opacity 0.18s ease, background 0.18s ease;
 }
 .guess-corner:hover .resize-handle {
   opacity: 1;
+  background: rgba(13, 14, 18, 0.9);
+}
+.resize-grip {
+  width: 15px;
+  height: 15px;
+  display: block;
 }
 .validate {
   font-size: 16px;

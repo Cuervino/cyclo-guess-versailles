@@ -36,6 +36,25 @@ for (let dy = -3; dy <= 3; dy++)
 const cyclosmTile = (x, y) =>
   `https://a.tile-cyclosm.openstreetmap.fr/cyclosm/${LANDING_TILE_Z}/${x}/${y}.png`;
 
+// Project every spot onto the landing tile grid so we can scatter discreet
+// markers over the backdrop. Pixel coords are relative to the grid's top-left
+// tile (LANDING_TILE_X - 4, LANDING_TILE_Y - 3); the grid wrapper is positioned
+// identically in CSS, so these line up with the map underneath.
+const LANDING_GRID_W = 2304; // 9 tiles × 256
+const LANDING_GRID_H = 1792; // 7 tiles × 256
+function spotToGridPx(lat, lng) {
+  const n = 2 ** LANDING_TILE_Z;
+  const xtile = ((lng + 180) / 360) * n;
+  const latRad = (lat * Math.PI) / 180;
+  const ytile =
+    ((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n;
+  return {
+    left: (xtile - (LANDING_TILE_X - 4)) * 256,
+    top: (ytile - (LANDING_TILE_Y - 3)) * 256,
+  };
+}
+const LANDING_MARKERS = SPOTS.map((s) => spotToGridPx(s.lat, s.lng));
+
 const GAME_PANO_OPTIONS = {
   clickToGo: false, // no move (can't jump to adjacent panoramas)
   linksControl: false, // hide the move arrows
@@ -519,6 +538,19 @@ export default function Game() {
               />
             ))}
           </div>
+          <div
+            className="landing-markers"
+            style={{ width: LANDING_GRID_W, height: LANDING_GRID_H }}
+            aria-hidden="true"
+          >
+            {LANDING_MARKERS.map((m, i) => (
+              <span
+                key={i}
+                className="landing-marker"
+                style={{ left: m.left, top: m.top }}
+              />
+            ))}
+          </div>
         </div>
         <div className="landing-scrim" />
         <div className="landing-content">
@@ -534,12 +566,59 @@ export default function Game() {
               Versailles.
             </span>
             <span>
-              À partir d'une photo figée (façon « NMPZ » pour les habitués de
-              Geoguessr), place ton point au plus près du lieu réel pour marquer
-              un maximum de points, sur 5 manches.
+              À partir d'une photo figée (façon "NMPZ" pour les habitués de{" "}
+              <a
+                className="lead-link"
+                href="https://www.geoguessr.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GeoGuessr
+                <svg
+                  className="ext-icon"
+                  viewBox="0 0 24 24"
+                  width="11"
+                  height="11"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7" />
+                  <path d="M9 7 H17 V15" />
+                </svg>
+              </a>
+              ), place ton point au plus près du lieu réel pour marquer un
+              maximum de points, sur 5 manches.
             </span>
             <span>
-              La plupart des points sont commentés par VeloVersailles.
+              Chaque spot vient avec l'avis de{" "}
+              <a
+                className="lead-link"
+                href="https://www.veloversailles.velovgp.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                VeloVersailles
+                <svg
+                  className="ext-icon"
+                  viewBox="0 0 24 24"
+                  width="11"
+                  height="11"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7" />
+                  <path d="M9 7 H17 V15" />
+                </svg>
+              </a>
+              .
             </span>
           </p>
           <button className="landing-start" onClick={() => setStarted(true)}>
@@ -557,8 +636,9 @@ export default function Game() {
           </p>
           <p className="landing-disclaimer">
             Prototype artisanal : l'API Google étant limitée en nombre de
-            requêtes, le jeu peut parfois ne pas se lancer. Le classement reste
-            temporaire et pourra être remis à zéro.
+            requêtes, le jeu peut parfois ne pas se lancer.
+            <br />
+            Le classement reste temporaire et pourra être remis à zéro.
           </p>
         </div>
 
@@ -729,8 +809,23 @@ export default function Game() {
             <div
               className="resize-handle"
               onPointerDown={onResizeStart}
-              title="Glisser pour régler la taille agrandie"
-            />
+              title="Glisser pour agrandir la carte"
+            >
+              <svg
+                className="resize-grip"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 4 L11 11" />
+                <path d="M4 8 L4 4 L8 4" />
+                <path d="M11 7 L11 11 L7 11" />
+              </svg>
+            </div>
             <div className="gmap-inner" ref={guessMapDivRef} />
           </div>
           <button className="validate" onClick={validate} disabled={!guess}>
