@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cyclo-Guess — Traitement du label « Avis VeloVersailles »</title>
+<style>
+  :root{
+    --bg:#16171d; --panel:#1f2028; --border:#2e303a;
+    --text:#e6e7ea; --muted:#9ca3af; --accent:#2563eb;
+    --green:#1f9d57; --red:#d83a34;
+    --vv:#8fa6c4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:28px}
+  h1{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 24px;max-width:780px;line-height:1.5}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:1280px}
+  @media(max-width:1080px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .prop{display:flex;flex-direction:column;gap:10px}
+  .prop-label{font-size:13px;color:var(--muted)}
+  .prop-label b{color:var(--text);font-size:14px}
+
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px}
+  .map{width:100%;height:120px;border-radius:10px;margin-bottom:12px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#243b2e,#1a2430),
+      repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 8px,transparent 8px 16px)}
+  .map .gdot,.map .rdot{position:absolute;width:12px;height:12px;border-radius:50%;border:2px solid #fff}
+  .map .gdot{background:var(--green);left:34%;top:40%}
+  .map .rdot{background:var(--red);left:62%;top:64%}
+  .map .seg{position:absolute;left:34%;top:40%;width:34%;border-top:2px dashed #f0a020;transform:rotate(28deg);transform-origin:left}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-bottom:10px}
+  .legend i{width:10px;height:10px;border-radius:50%;display:inline-block;border:2px solid #fff;vertical-align:middle;margin-right:5px}
+  .head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+  .head strong{font-size:21px}
+  .head span{color:var(--muted);font-size:14px}
+  .next{width:100%;border:none;border-radius:9px;padding:11px;font-size:15px;font-weight:600;
+    background:var(--accent);color:#fff;cursor:pointer;margin-top:14px}
+
+  /* le callout (variante 1), commun à toutes les variantes ; seul le label change */
+  .callout{background:rgba(143,166,196,.08);border:1px solid rgba(143,166,196,.22);
+    border-left:3px solid var(--vv);border-radius:8px;padding:12px 14px}
+  .callout p{margin:0;font-size:14px;line-height:1.5}
+  .callout .lbl{margin-bottom:6px}
+
+  /* A — sentence case, simple */
+  .lblA{font-size:13px;font-weight:600;color:var(--vv)}
+
+  /* B — deux tons */
+  .lblB{font-size:13px}
+  .lblB .a{color:var(--muted)}
+  .lblB .b{color:var(--text);font-weight:600}
+
+  /* C — monogramme VV */
+  .lblC{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text)}
+  .mono{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#7d93b3,#566d8c);
+    color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;letter-spacing:.02em}
+
+  /* D — chip discret */
+  .lblD{display:inline-block;font-size:12px;font-weight:600;color:var(--vv);
+    background:rgba(143,166,196,.14);border:1px solid rgba(143,166,196,.28);
+    padding:2px 9px;border-radius:20px}
+
+  /* E — run-in (nom en gras au fil du texte, pas de ligne label) */
+  .lblE-p{margin:0;font-size:14px;line-height:1.5}
+  .lblE-p b{color:var(--text)}
+
+  /* F — petite icône bulle SVG (pas d'emoji) */
+  .lblF{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--vv)}
+  .lblF svg{flex:0 0 auto}
+
+  .note{font-size:11px;color:var(--muted);line-height:1.4}
+</style>
+</head>
+<body>
+  <h1>« Avis VeloVersailles » — traitements du label (sans uppercase, sans emoji)</h1>
+  <p class="sub">Même callout que la proposition 1, on ne fait varier que le label. Sentence case partout,
+  aucun smiley. Dis-moi la lettre retenue (ou un mix, par exemple le monogramme C avec la couleur de A).</p>
+
+  <div class="grid">
+
+    <!-- A -->
+    <div class="prop">
+      <div class="prop-label"><b>A — Simple</b> · sentence case, semibold, couleur neutre</div>
+      <div class="card">
+        <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+        <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+        <div class="head"><strong>4 280 points</strong><span>à 210 m du lieu</span></div>
+        <div class="callout">
+          <div class="lbl lblA">Avis VeloVersailles</div>
+          <p>Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+        </div>
+        <button class="next">Manche suivante →</button>
+      </div>
+      <p class="note">Le plus sobre. Rien à maintenir, lisible. Mon recommandé.</p>
+    </div>
+
+    <!-- B -->
+    <div class="prop">
+      <div class="prop-label"><b>B — Deux tons</b> · « Avis » estompé + nom marqué</div>
+      <div class="card">
+        <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+        <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+        <div class="head"><strong>4 280 points</strong><span>à 210 m du lieu</span></div>
+        <div class="callout">
+          <div class="lbl lblB"><span class="a">Avis</span> <span class="b">VeloVersailles</span></div>
+          <p>Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+        </div>
+        <button class="next">Manche suivante →</button>
+      </div>
+      <p class="note">Hiérarchise : c'est le nom du collectif qui ressort.</p>
+    </div>
+
+    <!-- C -->
+    <div class="prop">
+      <div class="prop-label"><b>C — Monogramme</b> · pastille « VV » + nom</div>
+      <div class="card">
+        <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+        <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+        <div class="head"><strong>4 280 points</strong><span>à 210 m du lieu</span></div>
+        <div class="callout">
+          <div class="lbl lblC"><span class="mono">VV</span>Avis VeloVersailles</div>
+          <p>Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+        </div>
+        <button class="next">Manche suivante →</button>
+      </div>
+      <p class="note">Une marque visuelle propre, sans emoji. Tient lieu de mini-logo.</p>
+    </div>
+
+    <!-- D -->
+    <div class="prop">
+      <div class="prop-label"><b>D — Chip</b> · label en pastille arrondie</div>
+      <div class="card">
+        <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+        <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+        <div class="head"><strong>4 280 points</strong><span>à 210 m du lieu</span></div>
+        <div class="callout">
+          <div class="lbl"><span class="lblD">Avis VeloVersailles</span></div>
+          <p>Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+        </div>
+        <button class="next">Manche suivante →</button>
+      </div>
+      <p class="note">Plus « produit ». Attention à ne pas confondre avec un bouton.</p>
+    </div>
+
+    <!-- E -->
+    <div class="prop">
+      <div class="prop-label"><b>E — Run-in</b> · nom en gras au fil du texte</div>
+      <div class="card">
+        <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+        <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+        <div class="head"><strong>4 280 points</strong><span>à 210 m du lieu</span></div>
+        <div class="callout">
+          <p class="lblE-p"><b>VeloVersailles —</b> Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+        </div>
+        <button class="next">Manche suivante →</button>
+      </div>
+      <p class="note">Zéro ligne de label, gain de hauteur. Le nom amorce la phrase.</p>
+    </div>
+
+    <!-- F -->
+    <div class="prop">
+      <div class="prop-label"><b>F — Icône bulle</b> · petite icône SVG (pas d'emoji)</div>
+      <div class="card">
+        <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+        <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+        <div class="head"><strong>4 280 points</strong><span>à 210 m du lieu</span></div>
+        <div class="callout">
+          <div class="lbl lblF">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8fa6c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Avis VeloVersailles
+          </div>
+          <p>Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+        </div>
+        <button class="next">Manche suivante →</button>
+      </div>
+      <p class="note">Icône line propre (bulle d'avis). Suggère « commentaire » sans emoji.</p>
+    </div>
+
+  </div>
+</body>
+</html>

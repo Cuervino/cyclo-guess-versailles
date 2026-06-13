@@ -1,0 +1,13 @@
+{
+  "name": "billing-kill-switch",
+  "version": "1.0.0",
+  "description": "Disables a GCP project's billing when a budget threshold (or Monitoring alert) fires.",
+  "main": "index.js",
+  "scripts": {
+    "start": "functions-framework --target=killBilling --signature-type=cloudevent"
+  },
+  "dependencies": {
+    "@google-cloud/billing": "^4.1.0",
+    "@google-cloud/functions-framework": "^3.4.0"
+  }
+}

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cyclo-Guess — Exploration UX écran de fin</title>
+<style>
+  :root {
+    --bg: #16171d;
+    --panel: #1f2028;
+    --panel2: #262833;
+    --border: #2e303a;
+    --text: #e6e7ea;
+    --muted: #9ca3af;
+    --green: #2e9e5b;
+    --green2: #1f9d57;
+    --red: #d83a34;
+    --orange: #ff7a00;
+    --accent: #4f8cff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+    background: radial-gradient(1200px 600px at 50% -10%, #20222c, var(--bg));
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 80px; }
+  header h1 { font-size: 22px; margin: 0 0 6px; }
+  header p { color: var(--muted); margin: 0 0 4px; line-height: 1.5; }
+  .tension {
+    background: rgba(255, 122, 0, 0.08);
+    border: 1px solid rgba(255, 122, 0, 0.3);
+    color: #ffce9e;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin: 16px 0 22px;
+  }
+
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+  .tab {
+    flex: 1 1 0;
+    min-width: 200px;
+    text-align: left;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    color: var(--text);
+    font: inherit;
+    transition: border-color .15s, background .15s;
+  }
+  .tab:hover { border-color: var(--muted); }
+  .tab.active { border-color: var(--accent); background: var(--panel2); }
+  .tab .n { font-size: 12px; color: var(--muted); }
+  .tab .t { font-weight: 600; margin: 2px 0; }
+  .tab .d { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+  .statebar { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 13px; color: var(--muted); }
+  .seg { font: inherit; font-size: 13px; padding: 7px 12px; border-radius: 8px; cursor: pointer;
+    background: var(--panel); border: 1px solid var(--border); color: var(--text); }
+  .seg.active { border-color: var(--accent); background: var(--panel2); }
+
+  .stage { display: grid; grid-template-columns: 1fr 300px; gap: 22px; align-items: start; }
+  @media (max-width: 860px) { .stage { grid-template-columns: 1fr; } }
+
+  .device {
+    background: #0c0d11;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+    min-height: 520px;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .device::before {
+    content: "écran de fin de partie";
+    position: absolute; top: 10px; left: 14px;
+    font-size: 11px; color: #4b4d57; letter-spacing: .04em;
+  }
+
+  .card {
+    width: min(520px, 100%);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+  }
+  .prop { display: none; }
+  .prop.active { display: block; }
+
+  /* shared bits */
+  .hero { text-align: center; margin-bottom: 16px; }
+  .hero .label { color: var(--muted); font-size: 13px; }
+  .hero .score { font-size: 44px; font-weight: 700; line-height: 1.1; }
+  .hero .max { color: var(--muted); font-size: 15px; }
+  .ring {
+    --p: 85;
+    width: 120px; height: 120px; border-radius: 50%;
+    margin: 0 auto 10px;
+    background: conic-gradient(var(--green) calc(var(--p) * 1%), #33353f 0);
+    display: grid; place-items: center;
+    position: relative;
+  }
+  .ring::after {
+    content: ""; position: absolute; inset: 10px; border-radius: 50%; background: var(--panel);
+  }
+  .ring .inner { position: relative; z-index: 1; text-align: center; }
+  .ring .inner b { font-size: 26px; }
+  .ring .inner span { display:block; font-size: 11px; color: var(--muted); }
+
+  .rounds { display: flex; gap: 6px; justify-content: center; margin: 14px 0 18px; flex-wrap: wrap; }
+  .chip {
+    background: var(--panel2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 9px; font-size: 12px; text-align: center; min-width: 58px;
+  }
+  .chip b { display: block; font-size: 14px; }
+  .chip span { color: var(--muted); }
+
+  .name-input {
+    width: 100%; font: inherit; font-size: 15px; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border); border-radius: 9px;
+    padding: 11px 12px; margin-bottom: 12px;
+  }
+
+  .lb { border-top: 1px solid var(--border); padding-top: 12px; margin: 6px 0 16px; }
+  .lb h3 { font-size: 14px; margin: 0 0 8px; color: var(--muted); font-weight: 600; }
+  .lb ol { list-style: none; margin: 0; padding: 0; }
+  .lb li {
+    display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center;
+    padding: 7px 9px; border-radius: 7px; font-size: 14px;
+  }
+  .lb li:nth-child(odd) { background: rgba(255,255,255,.03); }
+  .lb li.you { background: rgba(79,140,255,.16); border: 1px solid rgba(79,140,255,.4); font-weight: 600; }
+  .lb .rank { color: var(--muted); text-align: right; }
+  .lb .sc { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+  button.act {
+    width: 100%; font: inherit; font-size: 16px; padding: 13px; border-radius: 10px;
+    border: 1px solid var(--green); background: var(--green); color: #fff; cursor: pointer; font-weight: 600;
+  }
+  button.act:hover { filter: brightness(1.07); }
+  button.act:disabled { opacity: .6; cursor: default; }
+  button.ghost {
+    width: 100%; font: inherit; font-size: 13px; padding: 9px; border-radius: 10px;
+    border: 1px solid transparent; background: transparent; color: var(--muted); cursor: pointer;
+    margin-top: 8px;
+  }
+  button.ghost:hover { color: var(--text); }
+  button.ghost.center { width: auto; display: block; margin: 8px auto 0; }
+  button.secondary {
+    width: 100%; font: inherit; font-size: 15px; padding: 12px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer;
+  }
+  button.secondary:hover { border-color: var(--muted); }
+
+  .toggle { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 9px; margin-bottom: 12px; font-size: 14px; }
+  .toggle input { width: 18px; height: 18px; accent-color: var(--green); }
+  .toggle .sub { color: var(--muted); font-size: 12px; }
+
+  .sent-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--green2);
+    font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+
+  .recap-map {
+    height: 170px; border-radius: 10px; margin-bottom: 14px; position: relative; overflow: hidden;
+    background:
+      linear-gradient(0deg, rgba(0,0,0,.15), rgba(0,0,0,.15)),
+      repeating-linear-gradient(45deg, #2b3a2e 0 14px, #2f4032 14px 28px);
+    border: 1px solid var(--border);
+  }
+  .recap-map .pt { position: absolute; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; transform: translate(-50%, -50%); }
+  .recap-map .true { background: var(--green2); }
+  .recap-map .guess { background: var(--red); }
+  .recap-map .ln { position: absolute; height: 0; border-top: 2px dashed var(--orange); transform-origin: left center; }
+
+  .collapse { border: 1px solid var(--border); border-radius: 9px; margin-bottom: 14px; overflow: hidden; }
+  .collapse summary { padding: 11px 13px; cursor: pointer; font-size: 14px; color: var(--muted); list-style: none; }
+  .collapse summary::-webkit-details-marker { display: none; }
+  .collapse[open] summary { border-bottom: 1px solid var(--border); color: var(--text); }
+  .collapse .body { padding: 6px 13px 12px; }
+
+  .share-row { display: flex; gap: 8px; margin-top: 8px; }
+  .share-row .secondary { flex: 1; }
+
+  /* notes panel */
+  .notes { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 18px; position: sticky; top: 18px; }
+  .notes h2 { font-size: 16px; margin: 0 0 4px; }
+  .notes .sub { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+  .notes .blk { display: none; }
+  .notes .blk.active { display: block; }
+  .notes ul { margin: 6px 0 14px; padding-left: 18px; }
+  .notes li { font-size: 13.5px; line-height: 1.5; margin-bottom: 4px; }
+  .notes .pro::marker { content: "+ "; color: var(--green2); }
+  .notes .con::marker { content: "− "; color: var(--red); }
+  .notes .friction { font-size: 12px; color: var(--muted); }
+  .bar { height: 6px; border-radius: 4px; background: #33353f; overflow: hidden; margin: 4px 0 12px; }
+  .bar i { display: block; height: 100%; background: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Cyclo-Guess — écran de fin de partie</h1>
+    <p>Exploration UX. Quatre approches, classées du plus <em>manuel</em> au plus <em>automatique</em> pour l'envoi du score.</p>
+    <div class="tension">⚠️ La tension à résoudre : aujourd'hui les joueurs cliquent « Rejouer » sans envoyer leur score. Chaque proposition gère ça différemment.</div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-i="1">
+      <div class="n">Proposition 1</div>
+      <div class="t">Hiérarchie claire</div>
+      <div class="d">Un bouton principal « envoyer + rejouer », un lien discret pour zapper.</div>
+    </button>
+    <button class="tab" data-i="2">
+      <div class="n">Proposition 2</div>
+      <div class="t">En deux temps</div>
+      <div class="d">On publie d'abord, on découvre son rang, puis « rejouer » apparaît.</div>
+    </button>
+    <button class="tab" data-i="3">
+      <div class="n">Proposition 3</div>
+      <div class="t">Auto-publié</div>
+      <div class="d">Le score part tout seul. Zéro risque d'oubli, opt-out possible.</div>
+    </button>
+    <button class="tab" data-i="4">
+      <div class="n">Proposition 4</div>
+      <div class="t">Récap + partage</div>
+      <div class="d">Carte récap, case « publier » cochée, bouton partager façon Wordle.</div>
+    </button>
+  </div>
+
+  <div class="statebar" id="statebar">
+    <span>État du joueur :</span>
+    <button class="seg active" data-known="1">Pseudo connu (déjà joué)</button>
+    <button class="seg" data-known="0">Première fois (pseudo inconnu)</button>
+  </div>
+
+  <div class="stage">
+    <div class="device">
+
+      <!-- PROPOSITION 1 -->
+      <div class="card prop active" id="p1">
+        <div class="hero">
+          <div class="ring" style="--p:85"><div class="inner"><b>85%</b><span>du max</span></div></div>
+          <div class="score">21 340</div>
+          <div class="max">/ 25 000 points</div>
+        </div>
+        <div class="rounds">
+          <div class="chip"><b>4980</b><span>M1</span></div>
+          <div class="chip"><b>3760</b><span>M2</span></div>
+          <div class="chip"><b>5000</b><span>M3</span></div>
+          <div class="chip"><b>2870</b><span>M4</span></div>
+          <div class="chip"><b>4730</b><span>M5</span></div>
+        </div>
+        <input class="name-input" id="p1-name" value="Val" />
+        <div class="lb">
+          <h3>Classement</h3>
+          <ol>
+            <li><span class="rank">1</span><span>Marie</span><span class="sc">23 110</span></li>
+            <li><span class="rank">2</span><span>Thomas</span><span class="sc">22 400</span></li>
+            <li><span class="rank">3</span><span>Léa</span><span class="sc">20 980</span></li>
+          </ol>
+        </div>
+        <button class="act" id="p1-act" onclick="flash(this,'Envoi…','Envoyer mon score et rejouer')">Envoyer mon score et rejouer</button>
+        <button class="ghost center">Rejouer sans envoyer</button>
+      </div>
+
+      <!-- PROPOSITION 2 -->
+      <div class="card prop" id="p2">
+        <div class="hero">
+          <div class="score">21 340</div>
+          <div class="max">/ 25 000 points</div>
+        </div>
+        <div id="p2-step1">
+          <input class="name-input" id="p2-name" value="Val" />
+          <button class="act" id="p2-pub" onclick="p2publish()">Publier mon score</button>
+          <button class="ghost center" onclick="p2skip()">Ne pas publier, rejouer</button>
+        </div>
+        <div id="p2-step2" style="display:none">
+          <div class="sent-badge">✓ Score publié — tu es 4ᵉ 🎉</div>
+          <div class="lb">
+            <h3>Classement</h3>
+            <ol>
+              <li><span class="rank">1</span><span>Marie</span><span class="sc">23 110</span></li>
+              <li><span class="rank">2</span><span>Thomas</span><span class="sc">22 400</span></li>
+              <li><span class="rank">3</span><span>Léa</span><span class="sc">20 980</span></li>
+              <li class="you"><span class="rank">4</span><span>Val (toi)</span><span class="sc">21 340</span></li>
+            </ol>
+          </div>
+          <button class="act" onclick="resetP2()">Rejouer</button>
+        </div>
+      </div>
+
+      <!-- PROPOSITION 3 -->
+      <div class="card prop" id="p3">
+        <div class="hero">
+          <div class="score">21 340</div>
+          <div class="max">/ 25 000 points</div>
+        </div>
+
+        <!-- joueur connu : publication automatique -->
+        <div id="p3-known">
+          <div class="sent-badge">✓ Score publié automatiquement</div>
+          <div class="lb">
+            <h3>Classement</h3>
+            <ol>
+              <li><span class="rank">1</span><span>Marie</span><span class="sc">23 110</span></li>
+              <li><span class="rank">2</span><span>Thomas</span><span class="sc">22 400</span></li>
+              <li><span class="rank">3</span><span>Léa</span><span class="sc">20 980</span></li>
+              <li class="you"><span class="rank">4</span><span>Val (toi)</span><span class="sc">21 340</span></li>
+              <li><span class="rank">5</span><span>Hugo</span><span class="sc">19 050</span></li>
+            </ol>
+          </div>
+          <button class="act">Rejouer</button>
+          <button class="ghost center">Retirer mon score du classement</button>
+        </div>
+
+        <!-- première fois : on demande le pseudo une seule fois -->
+        <div id="p3-first" style="display:none">
+          <p style="text-align:center;color:var(--muted);font-size:14px;margin:0 0 12px">
+            Première partie : choisis ton pseudo pour rejoindre le classement.
+          </p>
+          <input class="name-input" id="p3-name" placeholder="Choisis ton pseudo" />
+          <button class="act" id="p3-first-act" disabled>Entre ton pseudo pour publier</button>
+          <p class="friction" style="text-align:center;margin:10px 0 0">
+            Les prochaines fois, ce sera automatique (pseudo mémorisé).
+          </p>
+          <button class="ghost center">Rejouer sans publier</button>
+        </div>
+      </div>
+
+      <!-- PROPOSITION 4 -->
+      <div class="card prop" id="p4">
+        <div class="hero">
+          <div class="score">21 340 <span class="max">/ 25 000</span></div>
+        </div>
+        <div class="recap-map" id="recapMap"></div>
+        <input class="name-input" id="p4-name" value="Val" />
+        <label class="toggle">
+          <input type="checkbox" checked />
+          <span>Publier au classement <span class="sub">— décoche pour garder ce score privé</span></span>
+        </label>
+        <details class="collapse">
+          <summary>Voir le classement</summary>
+          <div class="body lb" style="border:0;padding-top:6px">
+            <ol>
+              <li><span class="rank">1</span><span>Marie</span><span class="sc">23 110</span></li>
+              <li><span class="rank">2</span><span>Thomas</span><span class="sc">22 400</span></li>
+              <li class="you"><span class="rank">4</span><span>Val (toi)</span><span class="sc">21 340</span></li>
+            </ol>
+          </div>
+        </details>
+        <button class="act">Rejouer</button>
+        <div class="share-row">
+          <button class="secondary" onclick="flash(this,'Copié ✓','📋 Partager mon résultat')">📋 Partager mon résultat</button>
+        </div>
+      </div>
+
+    </div>
+
+    <aside class="notes">
+      <h2 id="nt-title">Proposition 1 — Hiérarchie claire</h2>
+      <p class="sub" id="nt-sub"></p>
+      <div class="friction">Friction d'envoi</div>
+      <div class="bar"><i id="nt-bar" style="width:40%"></i></div>
+      <div id="nt-body"></div>
+    </aside>
+  </div>
+</div>
+
+<script>
+  const NOTES = {
+    1: {
+      title: "Proposition 1 — Hiérarchie claire",
+      sub: "Le geste par défaut envoie le score. Pour zapper, il faut viser un lien volontairement discret.",
+      bar: 35,
+      pros: ["L'action attendue (envoyer) est la plus grosse et la plus verte", "Un seul clic fait tout : envoyer + rejouer", "Reste simple, proche de l'existant"],
+      cons: ["On ne voit pas son rang mis à jour avant de repartir", "Le lien discret peut quand même être cliqué par habitude"]
+    },
+    2: {
+      title: "Proposition 2 — En deux temps",
+      sub: "On sépare publier et rejouer. « Rejouer » n'apparaît en gros qu'après la publication, donc impossible de l'oublier.",
+      bar: 15,
+      pros: ["Quasi impossible d'oublier d'envoyer", "Moment de satisfaction : on découvre son rang surligné", "Chaque écran a une seule action claire"],
+      cons: ["Deux clics au lieu d'un", "Un peu plus lent pour enchaîner les parties"]
+    },
+    3: {
+      title: "Proposition 3 — Auto-publié",
+      sub: "Le score part automatiquement à l'arrivée (pseudo demandé une seule fois). Plus aucun risque d'oubli.",
+      bar: 0,
+      pros: ["Zéro friction, zéro oubli possible", "Écran épuré, focalisé sur le classement et le rang", "Enchaînement de parties le plus rapide"],
+      cons: ["Moins de contrôle : tout score compte (y compris les ratés)", "Nécessite un opt-out clair (retirer / ne pas publier)", "Pseudo à demander en amont"]
+    },
+    4: {
+      title: "Proposition 4 — Récap + partage",
+      sub: "Publication cochée par défaut (opt-out), une carte récap des 5 manches, et un partage façon Wordle pour la conversation du groupe.",
+      bar: 20,
+      pros: ["La carte récap valorise la partie et le côté militant", "Le partage crée du bouche-à-oreille dans le groupe", "Publier par défaut, mais choix respecté"],
+      cons: ["Écran plus chargé", "La case à cocher est moins forte qu'un vrai geste", "Demande la carte récap (un peu plus de dev)"]
+    }
+  };
+
+  function renderNotes(i) {
+    const n = NOTES[i];
+    document.getElementById('nt-title').textContent = n.title;
+    document.getElementById('nt-sub').textContent = n.sub;
+    document.getElementById('nt-bar').style.width = n.bar + '%';
+    let html = '<ul>';
+    n.pros.forEach(p => html += '<li class="pro">' + p + '</li>');
+    n.cons.forEach(c => html += '<li class="con">' + c + '</li>');
+    html += '</ul>';
+    document.getElementById('nt-body').innerHTML = html;
+  }
+
+  document.getElementById('tabs').addEventListener('click', e => {
+    const btn = e.target.closest('.tab');
+    if (!btn) return;
+    const i = btn.dataset.i;
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === btn));
+    document.querySelectorAll('.prop').forEach(p => p.classList.toggle('active', p.id === 'p' + i));
+    renderNotes(i);
+  });
+
+  function flash(btn, on, off) {
+    const prev = btn.textContent;
+    btn.textContent = on; btn.disabled = true;
+    setTimeout(() => { btn.textContent = off || prev; btn.disabled = false; }, 900);
+  }
+  function p2publish() {
+    document.getElementById('p2-step1').style.display = 'none';
+    document.getElementById('p2-step2').style.display = 'block';
+  }
+  function p2skip() { alert('(démo) Rejouer sans publier'); }
+  function resetP2() {
+    document.getElementById('p2-step2').style.display = 'none';
+    document.getElementById('p2-step1').style.display = 'block';
+  }
+
+  // tiny fake recap map for proposition 4
+  (function () {
+    const map = document.getElementById('recapMap');
+    const pairs = [
+      [18, 30, 28, 52], [62, 22, 55, 40], [40, 70, 44, 60],
+      [78, 64, 70, 50], [30, 50, 35, 38]
+    ];
+    pairs.forEach(([gx, gy, tx, ty]) => {
+      const dx = tx - gx, dy = ty - gy;
+      const len = Math.hypot(dx, dy);
+      const ang = Math.atan2(dy, dx) * 180 / Math.PI;
+      const ln = document.createElement('div');
+      ln.className = 'ln';
+      ln.style.left = gx + '%'; ln.style.top = gy + '%';
+      ln.style.width = len + '%'; ln.style.transform = 'rotate(' + ang + 'deg)';
+      map.appendChild(ln);
+      const g = document.createElement('div'); g.className = 'pt guess'; g.style.left = gx + '%'; g.style.top = gy + '%'; map.appendChild(g);
+      const t = document.createElement('div'); t.className = 'pt true'; t.style.left = tx + '%'; t.style.top = ty + '%'; map.appendChild(t);
+    });
+  })();
+
+  // --- known vs first-time player ------------------------------------------
+  function applyKnown(known) {
+    const p1n = document.getElementById('p1-name'), p1a = document.getElementById('p1-act');
+    const p2n = document.getElementById('p2-name'), p2p = document.getElementById('p2-pub');
+    const p4n = document.getElementById('p4-name');
+    const p3k = document.getElementById('p3-known'), p3f = document.getElementById('p3-first');
+    if (known) {
+      p1n.value = 'Val'; p1n.placeholder = 'Ton pseudo';
+      p1a.disabled = false; p1a.textContent = 'Envoyer mon score et rejouer';
+      p2n.value = 'Val'; p2p.disabled = false;
+      p4n.value = 'Val';
+      p3k.style.display = 'block'; p3f.style.display = 'none';
+    } else {
+      p1n.value = ''; p1n.placeholder = 'Choisis ton pseudo';
+      p1a.disabled = true; p1a.textContent = 'Entre ton pseudo pour publier';
+      p2n.value = ''; p2p.disabled = true;
+      p4n.value = '';
+      p3k.style.display = 'none'; p3f.style.display = 'block';
+    }
+    resetP2();
+  }
+
+  function bindEnable(inputId, btnId, fullLabel, emptyLabel) {
+    const inp = document.getElementById(inputId), btn = document.getElementById(btnId);
+    inp.addEventListener('input', () => {
+      const ok = inp.value.trim().length > 0;
+      btn.disabled = !ok;
+      if (fullLabel) btn.textContent = ok ? fullLabel : emptyLabel;
+    });
+  }
+  bindEnable('p1-name', 'p1-act', 'Envoyer mon score et rejouer', 'Entre ton pseudo pour publier');
+  bindEnable('p2-name', 'p2-pub');
+  bindEnable('p3-name', 'p3-first-act', 'Publier mon score', 'Entre ton pseudo pour publier');
+
+  document.getElementById('statebar').addEventListener('click', e => {
+    const b = e.target.closest('.seg');
+    if (!b) return;
+    document.querySelectorAll('.seg').forEach(s => s.classList.toggle('active', s === b));
+    applyKnown(b.dataset.known === '1');
+  });
+
+  renderNotes(1);
+  applyKnown(true);
+</script>
+</body>
+</html>

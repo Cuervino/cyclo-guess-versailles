@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cyclo Guessr — styles de marqueurs (6 propositions)</title>
+<style>
+  :root{
+    --bg:#16171d; --panel:#1f2028; --border:#2e303a;
+    --text:#e6e7ea; --muted:#9ca3af; --accent:#2563eb;
+    --green:#1f9d57; --red:#d83a34;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:28px}
+  h1{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 24px;max-width:780px;line-height:1.5}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:1280px}
+  @media(max-width:1080px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .prop{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+  .prop .head{padding:13px 15px;border-bottom:1px solid var(--border)}
+  .prop .head h2{margin:0 0 3px;font-size:15px}
+  .prop .head p{margin:0;font-size:12px;color:var(--muted);line-height:1.45}
+
+  /* faux map: same palette as the in-game result map */
+  .map{position:relative;height:190px;
+    background:linear-gradient(135deg,#243b2e,#1a2430),
+      repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 8px,transparent 8px 16px)}
+  /* dashed connector like the game draws between guess and true location */
+  .map .connector{position:absolute;left:30%;top:38%;width:42%;height:0;
+    border-top:2px dashed #f0a020;transform:rotate(26deg);transform-origin:left;
+    box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+  .mk{position:absolute;filter:drop-shadow(0 3px 4px rgba(0,0,0,.45))}
+  /* anchor helpers: .true top-left, .guess bottom-right */
+  .truepos{left:28%;top:32%}
+  .guesspos{left:66%;top:60%}
+
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);padding:10px 15px}
+  .legend i{width:10px;height:10px;border-radius:50%;display:inline-block;border:2px solid #fff;vertical-align:middle;margin-right:5px}
+  .note{font-size:11px;color:var(--muted);line-height:1.4;padding:0 15px 14px;margin:0}
+</style>
+</head>
+<body>
+  <h1>Styles de marqueurs — 6 propositions</h1>
+  <p class="sub">Pour remplacer la goutte Google par défaut. Chaque style est montré dans ses deux rôles
+  du jeu : vert = vrai lieu, rouge = ton guess, avec le trait pointillé entre les deux comme à la révélation.
+  Dis-moi le numéro retenu (et si tu veux différencier les deux rôles par la forme, pas seulement la couleur).</p>
+
+  <div class="grid">
+
+    <!-- 1. Pastille + anneau -->
+    <div class="prop">
+      <div class="head"><h2>1 — Pastille + anneau</h2><p>Cercle plein, liseré blanc et halo doux. Sobre, très lisible, proche de l'actuel mais soigné.</p></div>
+      <div class="map">
+        <span class="connector"></span>
+        <span class="mk truepos">
+          <svg width="30" height="30" viewBox="0 0 30 30">
+            <circle cx="15" cy="15" r="13" fill="#1f9d57" opacity=".2"/>
+            <circle cx="15" cy="15" r="7.5" fill="#1f9d57" stroke="#fff" stroke-width="2.5"/>
+          </svg>
+        </span>
+        <span class="mk guesspos">
+          <svg width="30" height="30" viewBox="0 0 30 30">
+            <circle cx="15" cy="15" r="13" fill="#d83a34" opacity=".2"/>
+            <circle cx="15" cy="15" r="7.5" fill="#d83a34" stroke="#fff" stroke-width="2.5"/>
+          </svg>
+        </span>
+      </div>
+      <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+      <p class="note">Ancrage au centre du point. Le halo aide à repérer le marqueur sur une carte chargée.</p>
+    </div>
+
+    <!-- 2. Épingle lollipop -->
+    <div class="prop">
+      <div class="head"><h2>2 — Épingle « lollipop »</h2><p>Tête ronde sur tige fine, pas de goutte. Pointe précisément le sol, look moderne.</p></div>
+      <div class="map">
+        <span class="connector"></span>
+        <span class="mk truepos">
+          <svg width="22" height="36" viewBox="0 0 22 36">
+            <line x1="11" y1="11" x2="11" y2="34" stroke="#1f9d57" stroke-width="2.5"/>
+            <circle cx="11" cy="34" r="2" fill="#1f9d57"/>
+            <circle cx="11" cy="9" r="8" fill="#1f9d57" stroke="#fff" stroke-width="2"/>
+          </svg>
+        </span>
+        <span class="mk guesspos">
+          <svg width="22" height="36" viewBox="0 0 22 36">
+            <line x1="11" y1="11" x2="11" y2="34" stroke="#d83a34" stroke-width="2.5"/>
+            <circle cx="11" cy="34" r="2" fill="#d83a34"/>
+            <circle cx="11" cy="9" r="8" fill="#d83a34" stroke="#fff" stroke-width="2"/>
+          </svg>
+        </span>
+      </div>
+      <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+      <p class="note">Ancrage en bas de la tige. Précis pour localiser, sans la masse de la goutte classique.</p>
+    </div>
+
+    <!-- 3. Cible / réticule -->
+    <div class="prop">
+      <div class="head"><h2>3 — Cible / réticule</h2><p>Anneau ouvert + point central et graduations. Idéal pour « viser » une position.</p></div>
+      <div class="map">
+        <span class="connector"></span>
+        <span class="mk truepos">
+          <svg width="32" height="32" viewBox="0 0 32 32">
+            <circle cx="16" cy="16" r="10" fill="none" stroke="#1f9d57" stroke-width="2.5"/>
+            <circle cx="16" cy="16" r="3" fill="#1f9d57"/>
+            <line x1="16" y1="2" x2="16" y2="7" stroke="#1f9d57" stroke-width="2.5"/>
+            <line x1="16" y1="25" x2="16" y2="30" stroke="#1f9d57" stroke-width="2.5"/>
+            <line x1="2" y1="16" x2="7" y2="16" stroke="#1f9d57" stroke-width="2.5"/>
+            <line x1="25" y1="16" x2="30" y2="16" stroke="#1f9d57" stroke-width="2.5"/>
+          </svg>
+        </span>
+        <span class="mk guesspos">
+          <svg width="32" height="32" viewBox="0 0 32 32">
+            <circle cx="16" cy="16" r="10" fill="none" stroke="#d83a34" stroke-width="2.5"/>
+            <circle cx="16" cy="16" r="3" fill="#d83a34"/>
+            <line x1="16" y1="2" x2="16" y2="7" stroke="#d83a34" stroke-width="2.5"/>
+            <line x1="16" y1="25" x2="16" y2="30" stroke="#d83a34" stroke-width="2.5"/>
+            <line x1="2" y1="16" x2="7" y2="16" stroke="#d83a34" stroke-width="2.5"/>
+            <line x1="25" y1="16" x2="30" y2="16" stroke="#d83a34" stroke-width="2.5"/>
+          </svg>
+        </span>
+      </div>
+      <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+      <p class="note">Colle bien à l'esprit « deviner / pointer ». Un peu moins lisible si la carte est très chargée.</p>
+    </div>
+
+    <!-- 4. Bulle arrondie -->
+    <div class="prop">
+      <div class="head"><h2>4 — Bulle arrondie</h2><p>Pastille à coins ronds avec petit ergot vers le bas. Forme « ballon » plate et amicale.</p></div>
+      <div class="map">
+        <span class="connector"></span>
+        <span class="mk truepos">
+          <svg width="28" height="36" viewBox="0 0 28 36">
+            <path d="M14 35 L8.5 23 L19.5 23 Z" fill="#1f9d57"/>
+            <rect x="3" y="3" width="22" height="22" rx="8" fill="#1f9d57" stroke="#fff" stroke-width="2"/>
+            <circle cx="14" cy="14" r="3.6" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="mk guesspos">
+          <svg width="28" height="36" viewBox="0 0 28 36">
+            <path d="M14 35 L8.5 23 L19.5 23 Z" fill="#d83a34"/>
+            <rect x="3" y="3" width="22" height="22" rx="8" fill="#d83a34" stroke="#fff" stroke-width="2"/>
+            <circle cx="14" cy="14" r="3.6" fill="#fff"/>
+          </svg>
+        </span>
+      </div>
+      <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+      <p class="note">Ancrage sur la pointe basse. Pourrait accueillir une icône à la place du point blanc.</p>
+    </div>
+
+    <!-- 5. Icône sémantique -->
+    <div class="prop">
+      <div class="head"><h2>5 — Icône sémantique</h2><p>La forme dit le rôle : vrai lieu = ✓, ton guess = ✕. Couleur en renfort, pas seule.</p></div>
+      <div class="map">
+        <span class="connector"></span>
+        <span class="mk truepos">
+          <svg width="30" height="30" viewBox="0 0 30 30">
+            <circle cx="15" cy="15" r="12.5" fill="#1f9d57" stroke="#fff" stroke-width="2.5"/>
+            <path d="M9 15.5 L13 19.5 L21 11" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="mk guesspos">
+          <svg width="30" height="30" viewBox="0 0 30 30">
+            <circle cx="15" cy="15" r="12.5" fill="#d83a34" stroke="#fff" stroke-width="2.5"/>
+            <path d="M10 10 L20 20 M20 10 L10 20" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </div>
+      <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+      <p class="note">Lisible même pour daltoniens. Variante possible : vrai = drapeau, guess = point d'interrogation.</p>
+    </div>
+
+    <!-- 6. Losange -->
+    <div class="prop">
+      <div class="head"><h2>6 — Losange</h2><p>Carré pivoté à liseré blanc. Géométrique, se distingue nettement des ronds d'une carte.</p></div>
+      <div class="map">
+        <span class="connector"></span>
+        <span class="mk truepos">
+          <svg width="28" height="28" viewBox="0 0 28 28">
+            <rect x="6" y="6" width="16" height="16" rx="2.5" transform="rotate(45 14 14)" fill="#1f9d57" stroke="#fff" stroke-width="2.5"/>
+          </svg>
+        </span>
+        <span class="mk guesspos">
+          <svg width="28" height="28" viewBox="0 0 28 28">
+            <rect x="6" y="6" width="16" height="16" rx="2.5" transform="rotate(45 14 14)" fill="#d83a34" stroke="#fff" stroke-width="2.5"/>
+          </svg>
+        </span>
+      </div>
+      <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+      <p class="note">Ancrage au centre. Forme franche, mais sans direction (ne « pointe » pas le sol).</p>
+    </div>
+
+  </div>
+</body>
+</html>

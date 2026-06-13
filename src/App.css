@@ -1,0 +1,863 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Landing screen (immersive): a fixed Street-View-like backdrop, dark scrim,
+   copy + CTA in the lower-left, with the disclaimers stacked under the button. */
+.landing {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.landing-bg {
+  position: absolute;
+  inset: 0;
+  background: #e8e3d8; /* CyclOSM land color, shown until tiles load */
+  overflow: hidden;
+}
+/* A grid of CyclOSM tiles centered on Versailles. Pushed to ~70% horizontally
+   so the map's center (the château) lands in the visible area to the RIGHT of
+   the text panel, not hidden behind it. */
+.landing-tiles {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(9, 256px);
+  grid-auto-rows: 256px;
+  width: 2304px;
+}
+.landing-tiles img {
+  display: block;
+  width: 256px;
+  height: 256px;
+}
+/* Darken the left (where the text panel sits) and let the map breathe on the
+   right, plus a slight overall dim so the CyclOSM colors don't fight the UI. */
+.landing-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(14, 15, 19, 0.7) 0%,
+    rgba(14, 15, 19, 0.45) 45%,
+    rgba(14, 15, 19, 0.15) 100%
+  );
+}
+.landing-content {
+  position: relative;
+  margin: 0 auto 0 6vw;
+  padding: 32px;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(13, 14, 18, 0.86);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+.landing-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  background: #fff;
+  padding: 6px;
+  object-fit: contain;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+.landing-brand {
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: -0.5px;
+}
+.landing-lead {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #d2d5db;
+  max-width: 560px;
+}
+.landing-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.landing-chips .chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  color: #d2d5db;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+.landing-start {
+  align-self: flex-start;
+  margin-top: 4px;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+.landing-start:hover {
+  filter: brightness(1.08);
+}
+.landing-disclaimer {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+  border-left: 2px solid rgba(255, 255, 255, 0.18);
+  padding-left: 12px;
+}
+@media (max-width: 600px) {
+  .landing-content {
+    margin: 0 16px;
+    padding: 24px;
+  }
+  .landing-brand {
+    font-size: 30px;
+  }
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  flex: 0 0 auto;
+}
+.topbar .counts {
+  color: var(--muted);
+  font-size: 14px;
+}
+.topbar .actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+
+.workbench {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  min-height: 0;
+}
+
+.pano {
+  position: relative;
+  background: #000;
+  min-height: 0;
+}
+.pano .overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 15px;
+}
+
+.panel {
+  border-left: 1px solid var(--border);
+  background: var(--panel);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: auto;
+}
+
+.map {
+  width: 100%;
+  height: 220px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0c0d11;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.field textarea {
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.decision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: auto;
+}
+
+button {
+  font: inherit;
+  font-size: 15px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+}
+button:hover:not(:disabled) {
+  border-color: var(--muted);
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+button.ghost {
+  background: transparent;
+  color: var(--muted);
+}
+.decision .yes {
+  background: var(--yes);
+  border-color: var(--yes);
+  color: #fff;
+}
+.decision .no {
+  background: var(--no);
+  border-color: var(--no);
+  color: #fff;
+}
+.decision button {
+  font-size: 16px;
+  padding: 14px;
+}
+
+/* ---- Game ---------------------------------------------------------------- */
+.game {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+.game-pano {
+  position: absolute;
+  inset: 0;
+}
+/* Transparent layer that blocks all panorama interaction (pan, zoom, drag),
+   keeping the view fixed on the curated framing. */
+.pano-lock {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hud {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.hud-link {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+/* Quit to the landing screen. Top-right, above the result overlay so it stays
+   reachable during the reveal and end screen. */
+.quit-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 12;
+  border: 1px solid var(--border);
+  background: rgba(20, 21, 27, 0.85);
+  color: var(--text);
+  border-radius: 9px;
+  padding: 7px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.quit-btn:hover {
+  background: #272935;
+}
+
+/* Confirmation modal (in-app, themed) — replaces the native confirm dialog. */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-card {
+  width: min(380px, 92vw);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+.modal-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+.modal-text {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.modal-actions button {
+  padding: 9px 16px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.modal-danger {
+  background: var(--red);
+  border: 1px solid var(--red);
+  color: #fff;
+}
+.modal-danger:hover {
+  filter: brightness(1.08);
+}
+
+.hud-link:hover {
+  color: #fff;
+}
+
+/* Dev-only controls (removed from production builds): grouped bottom-left, out
+   of the way of the HUD (top-left) and the Quit button (top-right). */
+.dev-panel {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(255, 122, 0, 0.12);
+  border: 1px dashed var(--orange);
+  border-radius: 8px;
+}
+.dev-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--orange);
+}
+.dev-btn {
+  font-size: 12px;
+  padding: 4px 9px;
+  background: rgba(255, 122, 0, 0.18);
+  border: 1px solid var(--orange);
+  color: #ffce9e;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.dev-btn:hover {
+  filter: brightness(1.12);
+}
+
+.guess-corner {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: width 0.18s ease;
+}
+.guess-corner .gmap {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0c0d11;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+  transition: height 0.18s ease;
+}
+/* No animation while actively dragging the handle, so it tracks the cursor. */
+.guess-corner.resizing,
+.guess-corner.resizing .gmap {
+  transition: none;
+}
+.gmap-inner {
+  position: absolute;
+  inset: 0;
+}
+
+/* CyclOSM / OpenStreetMap attribution overlay on the maps */
+.tile-attrib {
+  background: rgba(255, 255, 255, 0.75);
+  color: #333;
+  font-size: 10px;
+  line-height: 1.4;
+  padding: 1px 5px;
+  border-top-left-radius: 4px;
+}
+.tile-attrib a {
+  color: #1a5;
+  text-decoration: none;
+}
+.resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  z-index: 2;
+  cursor: nwse-resize;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0 42%, transparent 42%);
+  border-bottom-right-radius: 8px;
+}
+.guess-corner:hover .resize-handle {
+  opacity: 1;
+}
+.validate {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  white-space: nowrap;
+}
+.validate:disabled {
+  background: var(--panel);
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+.result-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 24px;
+  transition: opacity 0.15s ease;
+}
+/* Preloading: the result map is mounted and fetching tiles, but invisible and
+   non-interactive so the player keeps using the panorama and guess map. */
+.result-overlay.preload {
+  opacity: 0;
+  pointer-events: none;
+}
+.result-overlay.shown {
+  opacity: 1;
+}
+.result-card {
+  width: min(640px, 94vw);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+}
+.result-map {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0c0d11;
+  margin-bottom: 14px;
+}
+.legend {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.result-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.result-head strong {
+  font-size: 22px;
+}
+.result-head span {
+  color: var(--muted);
+}
+.result-desc {
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+.result-desc.muted {
+  color: var(--muted);
+}
+/* VeloVersailles opinion, set apart in a tinted callout so it reads as the
+   collective's verdict rather than a stray paragraph. */
+.vv-callout {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  background: rgba(143, 166, 196, 0.08);
+  border: 1px solid rgba(143, 166, 196, 0.22);
+  border-left: 3px solid var(--vv);
+  border-radius: 8px;
+}
+.vv-label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vv);
+}
+.vv-callout p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.next {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.next:hover:not(:disabled) {
+  filter: brightness(1.08);
+  border-color: var(--accent);
+}
+
+/* Minimized result: the card hides and the panorama becomes visible again,
+   leaving only a slim bottom bar with the VeloVersa comment + actions. */
+.result-card {
+  position: relative;
+}
+.result-reduce {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  padding: 5px 9px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: rgba(20, 21, 27, 0.85);
+  color: var(--text);
+  border-radius: 9px;
+  cursor: pointer;
+}
+.result-reduce:hover {
+  background: #272935;
+}
+.result-overlay.minimized {
+  background: transparent;
+  pointer-events: none;
+}
+.result-overlay.minimized .result-card {
+  display: none;
+}
+.result-bottombar {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+.result-bottombar .bb-comment {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #d2d5db;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.result-bottombar .bb-reopen {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  border: 1px solid var(--border);
+  background: rgba(20, 21, 27, 0.85);
+  color: var(--text);
+  border-radius: 9px;
+  padding: 7px 11px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.result-bottombar .bb-reopen:hover {
+  background: #272935;
+}
+.result-bottombar .bb-next {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  border: none;
+  border-radius: 9px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+.result-bottombar .bb-next:hover {
+  filter: brightness(1.08);
+}
+.final-total {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+.final-list {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.end-hero {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  background: conic-gradient(var(--yes) calc(var(--p) * 1%), #33353f 0);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.ring::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  background: var(--panel);
+}
+.ring-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.ring-inner b {
+  font-size: 26px;
+}
+.ring-inner span {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+.end-score {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.end-max {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.round-chips {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.round-chips .chip {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 9px;
+  text-align: center;
+  min-width: 56px;
+}
+.round-chips .chip b {
+  display: block;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.round-chips .chip span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.lb {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin-bottom: 16px;
+}
+.end-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.replay-skip {
+  align-self: center;
+  font-size: 13px;
+  padding: 6px 10px;
+}
+.name-input {
+  width: 100%;
+  margin-bottom: 10px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.lb-error {
+  color: var(--no);
+  font-size: 13px;
+  margin: 0 0 10px;
+}
+.lb-title {
+  font-size: 16px;
+  margin: 6px 0 8px;
+}
+.lb-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 220px;
+  overflow: auto;
+}
+.lb-list li {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+.lb-list li:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.03);
+}
+.lb-list li.you {
+  background: rgba(79, 140, 255, 0.16);
+  border: 1px solid rgba(79, 140, 255, 0.4);
+  font-weight: 600;
+}
+.lb-sep {
+  text-align: center;
+  color: var(--muted);
+  padding: 2px 0 !important;
+}
+.lb-rank {
+  color: var(--muted);
+  text-align: right;
+}
+.lb-score {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.muted {
+  color: var(--muted);
+}
+.link {
+  color: var(--muted);
+  text-decoration: none;
+  align-self: center;
+  font-size: 14px;
+}
+.link:hover {
+  color: var(--text);
+}
+
+/* Centered single-card states (loading, no key, error, done) */
+.screen {
+  flex: 1 1 auto;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.card {
+  max-width: 560px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+}
+.card h1 {
+  margin: 0 0 12px;
+  font-size: 24px;
+}
+.card p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.card pre,
+.card code {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

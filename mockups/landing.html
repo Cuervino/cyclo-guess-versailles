@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cyclo-Guess Versailles — exploration landing page (4 pistes)</title>
+<style>
+  :root{
+    --bg:#16171d; --panel:#1f2028; --border:#2e303a;
+    --text:#e6e7ea; --muted:#9ca3af; --accent:#2563eb;
+    --green:#1f9d57; --red:#d83a34; --vv:#8fa6c4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#0e0f13;color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:28px}
+  .page-title{font-size:20px;margin:0 0 4px}
+  .page-sub{color:var(--muted);font-size:13px;margin:0 0 28px;max-width:760px;line-height:1.5}
+  .specimen{margin-bottom:36px}
+  .specimen > .lab{font-size:13px;color:var(--muted);margin:0 0 10px}
+  .specimen > .lab b{color:var(--text);font-size:14px}
+  /* a faux browser viewport */
+  .screen{position:relative;border:1px solid var(--border);border-radius:14px;overflow:hidden;
+    background:var(--bg);min-height:560px;display:flex;flex-direction:column}
+
+  .btn{border:none;border-radius:10px;padding:13px 22px;font-size:16px;font-weight:600;
+    background:var(--accent);color:#fff;cursor:pointer}
+  .btn:hover{filter:brightness(1.08)}
+  .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+  h1.brand{margin:0;font-size:34px;letter-spacing:-.5px}
+  .lead{color:#d2d5db;line-height:1.6}
+  .disclaimer{font-size:12px;color:var(--muted);line-height:1.5;
+    border-left:2px solid var(--border);padding-left:12px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;
+    background:rgba(255,255,255,.05);border:1px solid var(--border);
+    border-radius:20px;padding:6px 12px;color:#d2d5db}
+  .chip b{color:var(--text);font-weight:600}
+
+  /* faux street view tile */
+  .pano{position:relative;background:
+    linear-gradient(180deg,rgba(120,150,180,.4),rgba(20,25,35,.75)),
+    repeating-linear-gradient(90deg,#3a4150 0 2px,transparent 2px 60px),
+    linear-gradient(160deg,#5b6b7d,#2b3340 70%)}
+  .pin{position:absolute;font-size:24px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
+
+  .vv-callout{padding:11px 13px;background:rgba(143,166,196,.08);
+    border:1px solid rgba(143,166,196,.22);border-left:3px solid var(--vv);border-radius:8px}
+  .vv-label{font-size:13px;font-weight:600;color:var(--vv);margin-bottom:5px}
+  .vv-callout p{margin:0;font-size:13px;line-height:1.5}
+
+  /* ============ 1. Minimal centré ============ */
+  .p1{align-items:center;justify-content:center;text-align:center;padding:48px 32px;gap:0}
+  .p1 .brand{margin-bottom:14px}
+  .p1 .lead{max-width:560px;margin:0 auto 24px;font-size:17px}
+  .p1 .chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
+  .p1 .btn{margin-bottom:26px}
+  .p1 .disclaimer{max-width:520px;text-align:left}
+
+  /* ============ 2. Split éditorial ============ */
+  .p2{flex-direction:row}
+  .p2 .left{flex:1;padding:48px 40px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+  .p2 .brand{font-size:30px}
+  .p2 .lead{font-size:16px;max-width:460px}
+  .p2 ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+  .p2 li{display:flex;gap:10px;font-size:14px;color:#d2d5db}
+  .p2 li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.06);
+    border:1px solid var(--border);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--vv)}
+  .p2 .actions{display:flex;gap:12px;align-items:center;margin-top:4px}
+  .p2 .disclaimer{margin-top:6px;max-width:460px}
+  .p2 .right{flex:1;position:relative;min-height:560px}
+  .p2 .right .pano{position:absolute;inset:0}
+  .p2 .right .pin{left:46%;top:44%}
+  .p2 .right .vv-callout{position:absolute;left:24px;right:24px;bottom:24px;backdrop-filter:blur(2px)}
+
+  /* ============ 3. Étapes / règles ============ */
+  .p3{padding:40px 36px;gap:26px}
+  .p3 .top{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .p3 .lead{max-width:600px;font-size:16px}
+  .p3 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .p3 .step{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px}
+  .p3 .step .n{width:28px;height:28px;border-radius:8px;background:rgba(37,99,235,.18);
+    color:#7ea2ff;display:grid;place-items:center;font-weight:700;margin-bottom:10px}
+  .p3 .step h3{margin:0 0 6px;font-size:15px}
+  .p3 .step p{margin:0;font-size:13px;color:var(--muted);line-height:1.5}
+  .p3 .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .p3 .foot .disclaimer{flex:1;min-width:260px}
+
+  /* ============ 4. Immersif plein écran ============ */
+  .p4{position:relative;justify-content:flex-end;padding:0}
+  .p4 .bg{position:absolute;inset:0}
+  .p4 .bg .pin{left:52%;top:40%}
+  .p4 .scrim{position:absolute;inset:0;background:
+    linear-gradient(180deg,rgba(14,15,19,.35) 0%,rgba(14,15,19,.2) 40%,rgba(14,15,19,.92) 100%)}
+  .p4 .content{position:relative;padding:40px;max-width:620px;display:flex;flex-direction:column;gap:16px}
+  .p4 .brand{font-size:36px}
+  .p4 .lead{font-size:17px;max-width:540px}
+  .p4 .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .p4 .actions{display:flex;gap:12px;align-items:center;margin-top:4px}
+  .p4 .disclaimer{border-color:rgba(255,255,255,.18);max-width:540px;margin-top:4px}
+  @media(max-width:760px){.p2{flex-direction:column}.p3 .steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <h1 class="page-title">Cyclo-Guess Versailles — 4 pistes de landing page</h1>
+  <p class="page-sub">L'écran d'accueil avant de lancer une partie. Même contenu partout
+  (pitch, NMPZ, but, 5 manches, avis VeloVersailles, disclaimer Street View), 4 mises en page.
+  Dis-moi la piste retenue, on l'intègre comme premier écran du jeu.</p>
+
+  <!-- ===================== 1 ===================== -->
+  <div class="specimen">
+    <p class="lab"><b>1 — Minimal centré</b> · hero épuré, faits en chips, disclaimer discret</p>
+    <div class="screen p1">
+      <h1 class="brand">Cyclo-Guess Versailles</h1>
+      <p class="lead">Versailles compte de bons et de mauvais aménagements cyclables.
+      On va en explorer quelques-uns à travers ce petit jeu inspiré des plus grands.</p>
+      <div class="chips">
+        <span class="chip"><b>NMPZ</b> · image figée, ni déplacement ni zoom</span>
+        <span class="chip"><b>5 manches</b></span>
+        <span class="chip">Le plus proche = le plus de points</span>
+        <span class="chip">L'avis de <b>VeloVersailles</b></span>
+      </div>
+      <button class="btn">Commencer</button>
+      <p class="disclaimer">Les vues proviennent de Google Street View : elles peuvent dater de
+      plusieurs mois ou années et ne reflètent pas forcément l'état actuel des aménagements à Versailles.</p>
+    </div>
+  </div>
+
+  <!-- ===================== 2 ===================== -->
+  <div class="specimen">
+    <p class="lab"><b>2 — Split éditorial</b> · texte à gauche, Street View + avis à droite</p>
+    <div class="screen p2">
+      <div class="left">
+        <h1 class="brand">Cyclo-Guess Versailles</h1>
+        <p class="lead">De bons et de mauvais aménagements cyclables se cachent dans la ville.
+        Un petit jeu inspiré des plus grands pour les repérer.</p>
+        <ul>
+          <li><span class="n">1</span><span><b>Observe</b> la vue, figée (mode NMPZ : ni déplacement ni zoom).</span></li>
+          <li><span class="n">2</span><span><b>Place ton guess</b> au plus près du lieu réel pour marquer un max de points.</span></li>
+          <li><span class="n">3</span><span><b>5 manches</b>, et à chaque spot ou presque, l'avis de VeloVersailles.</span></li>
+        </ul>
+        <div class="actions"><button class="btn">Commencer</button></div>
+        <p class="disclaimer">Vues issues de Google Street View : possiblement vieilles de plusieurs
+        mois ou années, elles ne reflètent pas forcément l'état actuel des aménagements.</p>
+      </div>
+      <div class="right">
+        <div class="pano"><span class="pin">📍</span></div>
+        <div class="vv-callout">
+          <div class="vv-label">Avis VeloVersailles</div>
+          <p>Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 3 ===================== -->
+  <div class="specimen">
+    <p class="lab"><b>3 — Étapes / règles du jeu</b> · pitch puis 3 cartes, disclaimer en pied</p>
+    <div class="screen p3">
+      <div class="top">
+        <h1 class="brand">Cyclo-Guess Versailles</h1>
+        <p class="lead">Versailles compte de bons et de mauvais aménagements cyclables.
+        On va en explorer quelques-uns à travers ce petit jeu inspiré des plus grands.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <h3>Une vue figée</h3>
+          <p>Mode NMPZ : pas de déplacement, pas de zoom. Juste l'image, à toi de la lire.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h3>Place ton guess</h3>
+          <p>Sur la carte de Versailles. Plus tu es proche du lieu réel, plus tu marques de points.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h3>Score &amp; avis</h3>
+          <p>5 manches. À chaque spot ou presque, VeloVersailles donne son avis sur l'aménagement.</p>
+        </div>
+      </div>
+      <div class="foot">
+        <p class="disclaimer">Les vues proviennent de Google Street View : elles peuvent dater de plusieurs
+        mois ou années et ne reflètent pas forcément l'état actuel des aménagements à Versailles.</p>
+        <button class="btn">Commencer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 4 ===================== -->
+  <div class="specimen">
+    <p class="lab"><b>4 — Immersif plein écran</b> · Street View en fond, texte en surimpression</p>
+    <div class="screen p4">
+      <div class="bg pano"><span class="pin">📍</span></div>
+      <div class="scrim"></div>
+      <div class="content">
+        <h1 class="brand">Cyclo-Guess Versailles</h1>
+        <p class="lead">De bons et de mauvais aménagements cyclables se cachent dans la ville.
+        Un jeu inspiré des plus grands pour les explorer, vue figée (NMPZ), en 5 manches.
+        Vise le lieu exact, marque un max de points, et découvre l'avis de VeloVersailles.</p>
+        <div class="chips">
+          <span class="chip"><b>NMPZ</b></span>
+          <span class="chip"><b>5 manches</b></span>
+          <span class="chip">Avis VeloVersailles</span>
+        </div>
+        <div class="actions"><button class="btn">Commencer</button></div>
+        <p class="disclaimer">Vues Google Street View, parfois anciennes de plusieurs mois ou années :
+        elles ne reflètent pas forcément l'état actuel des aménagements à Versailles.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

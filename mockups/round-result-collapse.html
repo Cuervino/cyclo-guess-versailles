@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cyclo-Guess — Résultat de manche : réduire / agrandir (4 propositions)</title>
+<style>
+  :root{
+    --bg:#16171d; --panel:#1f2028; --border:#2e303a;
+    --text:#e6e7ea; --muted:#9ca3af; --accent:#2563eb;
+    --green:#1f9d57; --red:#d83a34;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    padding:28px;
+  }
+  h1{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 24px;max-width:720px;line-height:1.5}
+  .grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:24px;max-width:1100px;
+  }
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .prop{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+  .prop-head{padding:14px 16px;border-bottom:1px solid var(--border)}
+  .prop-head h2{font-size:15px;margin:0 0 3px}
+  .prop-head p{font-size:12px;color:var(--muted);margin:0;line-height:1.45}
+
+  /* The simulated game screen behind each proposal */
+  .screen{
+    position:relative;height:440px;overflow:hidden;background:#0c0d11;
+    /* fake Street View panorama */
+    background-image:
+      linear-gradient(180deg, rgba(120,150,180,.35), rgba(20,25,35,.7)),
+      repeating-linear-gradient(90deg,#3a4150 0 2px,transparent 2px 60px),
+      linear-gradient(160deg,#5b6b7d,#2b3340 70%);
+  }
+  .pano-tag{
+    position:absolute;top:10px;left:10px;z-index:1;
+    background:rgba(0,0,0,.5);color:#cfd3da;font-size:11px;
+    padding:3px 8px;border-radius:20px;backdrop-filter:blur(2px);
+  }
+  .pano-pin{
+    position:absolute;left:50%;top:54%;transform:translate(-50%,-100%);
+    font-size:26px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6));z-index:1;
+  }
+
+  /* shared result bits */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.55);transition:opacity .2s,backdrop-filter .2s}
+  .card{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:16px;width:min(420px,90%);
+  }
+  .map{
+    width:100%;height:150px;border-radius:10px;margin-bottom:12px;overflow:hidden;
+    position:relative;background:
+      linear-gradient(135deg,#243b2e,#1a2430),
+      repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 8px,transparent 8px 16px);
+  }
+  .map.small{height:84px}
+  .map .gdot,.map .rdot{position:absolute;width:12px;height:12px;border-radius:50%;border:2px solid #fff}
+  .map .gdot{background:var(--green);left:34%;top:40%}
+  .map .rdot{background:var(--red);left:62%;top:64%}
+  .map .seg{position:absolute;left:34%;top:40%;width:34%;height:0;border-top:2px dashed #f0a020;transform:rotate(28deg);transform-origin:left}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-bottom:10px}
+  .legend i{width:10px;height:10px;border-radius:50%;display:inline-block;border:2px solid #fff;vertical-align:middle;margin-right:5px}
+  .head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+  .head strong{font-size:21px}
+  .head span{color:var(--muted);font-size:14px}
+  .desc{font-size:13px;line-height:1.5;color:#d2d5db;margin:0 0 14px}
+  .next{
+    width:100%;border:none;border-radius:9px;padding:11px;font-size:15px;font-weight:600;
+    background:var(--accent);color:#fff;cursor:pointer
+  }
+  .next:hover{filter:brightness(1.1)}
+  .icon-btn{
+    border:1px solid var(--border);background:rgba(20,21,27,.85);color:var(--text);
+    border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;padding:7px 11px
+  }
+  .icon-btn:hover{background:#272935}
+  .center{position:absolute;inset:0;display:grid;place-items:center;padding:20px}
+
+  /* ---- P1 : barre basse ---- */
+  #p1 .card{transition:transform .28s ease, opacity .2s}
+  #p1.min .dim{opacity:0;backdrop-filter:none;pointer-events:none}
+  #p1.min .card{transform:translateY(120%);opacity:0;pointer-events:none}
+  #p1 .bottombar{
+    position:absolute;left:12px;right:12px;bottom:12px;z-index:3;
+    display:flex;align-items:center;gap:12px;
+    background:var(--panel);border:1px solid var(--border);border-radius:12px;
+    padding:10px 14px;transform:translateY(140%);transition:transform .28s ease;
+    box-shadow:0 6px 20px rgba(0,0,0,.4)
+  }
+  #p1.min .bottombar{transform:translateY(0)}
+  #p1 .p1-reduce{position:absolute;top:12px;right:12px;z-index:2;padding:5px 9px;font-size:12px}
+  #p1 .bottombar .bb-comment{flex:1;font-size:13px;line-height:1.4;color:#d2d5db;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #p1 .bottombar .bb-reopen{flex:0 0 auto;white-space:nowrap}
+  #p1 .bottombar .bb-next{flex:0 0 auto;width:auto;white-space:nowrap;padding:8px 14px;font-size:13px}
+
+  /* ---- P2 : voir à travers (peek) ---- */
+  #p2 .card{transition:opacity .2s, transform .2s}
+  #p2.peek .dim{opacity:0;backdrop-filter:none}
+  #p2.peek .card{opacity:0;transform:scale(.97);pointer-events:none}
+  #p2 .peekbtn{position:absolute;right:12px;bottom:12px;z-index:4}
+  #p2 .holdhint{position:absolute;left:12px;bottom:14px;z-index:4;font-size:11px;color:var(--muted);background:rgba(0,0,0,.4);padding:4px 8px;border-radius:20px}
+
+  /* ---- P3 : bottom sheet 3 paliers ---- */
+  #p3 .dim{opacity:0;pointer-events:none}
+  #p3 .sheet{
+    position:absolute;left:0;right:0;bottom:0;z-index:3;
+    background:var(--panel);border-top:1px solid var(--border);
+    border-radius:16px 16px 0 0;padding:8px 16px 16px;
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+    box-shadow:0 -8px 24px rgba(0,0,0,.45);
+    height:420px;
+  }
+  /* snap points via translateY of a tall sheet */
+  #p3[data-snap="full"] .sheet{transform:translateY(0)}
+  #p3[data-snap="half"] .sheet{transform:translateY(190px)}
+  #p3[data-snap="peek"] .sheet{transform:translateY(348px)}
+  #p3 .grab{width:40px;height:5px;border-radius:3px;background:#4a4d5a;margin:4px auto 12px;cursor:grab}
+  #p3 .peekrow{display:flex;align-items:baseline;gap:10px;cursor:pointer}
+  #p3 .peekrow strong{font-size:18px}
+  #p3 .peekrow span{color:var(--muted);font-size:13px}
+  #p3 .peekrow .chev{margin-left:auto;color:var(--muted);transition:transform .3s}
+  #p3[data-snap="peek"] .peekrow .chev{transform:rotate(180deg)}
+
+  /* ---- P4 : carte flottante compacte ---- */
+  #p4 .dim{transition:opacity .25s,backdrop-filter .25s}
+  #p4.min .dim{opacity:0;backdrop-filter:none;pointer-events:none}
+  #p4 .card{transition:transform .28s ease,opacity .25s}
+  #p4.min .card{opacity:0;transform:scale(.92);pointer-events:none}
+  #p4 .mini{
+    position:absolute;top:12px;right:12px;z-index:3;width:212px;
+    background:var(--panel);border:1px solid var(--border);border-radius:12px;
+    padding:12px;box-shadow:0 6px 20px rgba(0,0,0,.45);
+    transform:scale(.9);opacity:0;pointer-events:none;transform-origin:top right;
+    transition:transform .28s ease,opacity .25s
+  }
+  #p4.min .mini{transform:scale(1);opacity:1;pointer-events:auto}
+  #p4 .mini .mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  #p4 .mini .mh strong{font-size:17px}
+  #p4 .mini .md{font-size:12px;color:var(--muted)}
+  #p4 .mini .next{padding:8px;font-size:13px;margin-top:8px}
+
+  .hint{font-size:11px;color:var(--muted);text-align:center;padding:8px 0 0}
+</style>
+</head>
+<body>
+  <h1>Résultat de manche — réduire / agrandir le panneau</h1>
+  <p class="sub">Quatre façons de masquer temporairement la carte de résultat pour revoir le Street View
+  (le « page » derrière), puis la rouvrir. Les maquettes sont interactives : clique pour tester.
+  Dis-moi laquelle valider, on l'implémente dans <code>Game.jsx</code>.</p>
+
+  <div class="grid">
+
+    <!-- PROPOSITION 1 -->
+    <div class="prop">
+      <div class="prop-head">
+        <h2>1 — Réduire en barre basse</h2>
+        <p>Le panneau glisse vers le bas et se résume à une fine barre (score + distance). Plein écran libéré. Clic sur la barre pour rouvrir.</p>
+      </div>
+      <div class="screen" id="p1">
+        <span class="pano-tag">Street View — Carrefour rue de l'Orangerie</span>
+        <span class="pano-pin">📍</span>
+        <div class="dim"></div>
+        <div class="center">
+          <div class="card" style="position:relative">
+            <button class="icon-btn p1-reduce" title="Réduire pour revoir le Street View"
+              onclick="document.getElementById('p1').classList.add('min')">▾ Réduire</button>
+            <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+            <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+            <div class="head"><strong>4 280 points</strong><span>à 210 m du lieu</span></div>
+            <p class="desc">Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+            <button class="next">Manche suivante →</button>
+          </div>
+        </div>
+        <div class="bottombar">
+          <span class="bb-comment">Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</span>
+          <button class="icon-btn bb-reopen" onclick="document.getElementById('p1').classList.remove('min')">▴ Revoir</button>
+          <button class="next bb-next">Manche suivante →</button>
+        </div>
+      </div>
+      <p class="hint">Clic « Réduire » (haut droite) → barre basse : commentaire VeloVersa + « Revoir » + « Manche suivante »</p>
+    </div>
+
+    <!-- PROPOSITION 2 -->
+    <div class="prop">
+      <div class="prop-head">
+        <h2>2 — Voir à travers (œil)</h2>
+        <p>Un bouton « œil » fait disparaître tout le panneau le temps de regarder le Street View. On relâche, le panneau revient. Le plus direct pour comparer.</p>
+      </div>
+      <div class="screen" id="p2">
+        <span class="pano-tag">Street View — Carrefour rue de l'Orangerie</span>
+        <span class="pano-pin">📍</span>
+        <div class="dim"></div>
+        <div class="center">
+          <div class="card">
+            <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+            <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+            <div class="head"><strong>4 280 points</strong><span>à 210 m du lieu</span></div>
+            <p class="desc">Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+            <button class="next">Manche suivante →</button>
+          </div>
+        </div>
+        <span class="holdhint" id="p2hint">Maintenir pour voir le Street View</span>
+        <button class="icon-btn peekbtn"
+          onmousedown="document.getElementById('p2').classList.add('peek')"
+          onmouseup="document.getElementById('p2').classList.remove('peek')"
+          onmouseleave="document.getElementById('p2').classList.remove('peek')"
+          ontouchstart="event.preventDefault();document.getElementById('p2').classList.add('peek')"
+          ontouchend="document.getElementById('p2').classList.remove('peek')">👁 Voir derrière</button>
+      </div>
+      <p class="hint">Maintenir le bouton « œil » → le panneau s'efface tant qu'on tient</p>
+    </div>
+
+    <!-- PROPOSITION 3 -->
+    <div class="prop">
+      <div class="prop-head">
+        <h2>3 — Tiroir à paliers (bottom sheet)</h2>
+        <p>Le panneau est un tiroir qu'on fait monter/descendre entre 3 hauteurs : plein, moitié, réduit. Patron mobile, on dose ce qu'on voit du Street View.</p>
+      </div>
+      <div class="screen" id="p3" data-snap="full">
+        <span class="pano-tag">Street View — Carrefour rue de l'Orangerie</span>
+        <span class="pano-pin">📍</span>
+        <div class="dim"></div>
+        <div class="sheet">
+          <div class="grab" id="p3grab"></div>
+          <div class="peekrow" onclick="cycleSnap()">
+            <strong>4 280 points</strong><span>à 210 m du lieu</span>
+            <span class="chev">▾</span>
+          </div>
+          <div style="margin-top:12px">
+            <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+            <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+            <p class="desc">Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+            <button class="next">Manche suivante →</button>
+          </div>
+        </div>
+      </div>
+      <p class="hint">Clic sur la poignée / la ligne de score → cycle plein › moitié › réduit</p>
+    </div>
+
+    <!-- PROPOSITION 4 -->
+    <div class="prop">
+      <div class="prop-head">
+        <h2>4 — Vignette flottante en coin</h2>
+        <p>Le panneau se rétracte en une petite vignette dans un coin (score + mini-carte). Le Street View est entièrement visible. Clic pour réétendre.</p>
+      </div>
+      <div class="screen min" id="p4">
+        <span class="pano-tag">Street View — Carrefour rue de l'Orangerie</span>
+        <span class="pano-pin">📍</span>
+        <div class="dim"></div>
+        <div class="center">
+          <div class="card">
+            <div class="map"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+            <div class="legend"><span><i style="background:var(--green)"></i>Vrai lieu</span><span><i style="background:var(--red)"></i>Ton guess</span></div>
+            <div class="head"><strong>4 280 points</strong><span>à 210 m du lieu</span></div>
+            <p class="desc">Piste cyclable qui disparaît au carrefour, les vélos sont rejetés sur la chaussée.</p>
+            <div style="display:flex;gap:8px">
+              <button class="icon-btn" onclick="document.getElementById('p4').classList.add('min')">⤡ Réduire en coin</button>
+              <button class="next" style="flex:1">Manche suivante →</button>
+            </div>
+          </div>
+        </div>
+        <div class="mini">
+          <div class="mh"><strong>4 280 pts</strong>
+            <button class="icon-btn" style="padding:4px 7px" onclick="document.getElementById('p4').classList.remove('min')">⤢</button>
+          </div>
+          <div class="map small"><div class="seg"></div><div class="gdot"></div><div class="rdot"></div></div>
+          <div class="md">à 210 m du lieu</div>
+          <button class="next">Manche suivante →</button>
+        </div>
+      </div>
+      <p class="hint">Clic « Réduire en coin » → vignette · clic ⤢ → réétend</p>
+    </div>
+
+  </div>
+
+<script>
+  function cycleSnap(){
+    var el=document.getElementById('p3');
+    var order=['full','half','peek'];
+    var i=order.indexOf(el.dataset.snap);
+    el.dataset.snap=order[(i+1)%order.length];
+  }
+</script>
+</body>
+</html>

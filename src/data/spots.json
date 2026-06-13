@@ -1,0 +1,442 @@
+[
+  {
+    "id": "aZeTQp_jtZ4E0274X0OfiQ",
+    "lat": 48.78798402318056,
+    "lng": 2.1500106796618224,
+    "heading": 141.48476841041122,
+    "pitch": -0.3343047385544793,
+    "zoom": 2.8941663081693463,
+    "description": "À l'approche de la voie rapide, l'aménagement cyclable est à peine marqué d'un côté, et absent de l'autre.",
+    "createdAt": "2026-06-12T20:43:00.736Z"
+  },
+  {
+    "id": "WhHlujRWGt13js1KMlZ2jw",
+    "lat": 48.80134003569392,
+    "lng": 2.1316392901148995,
+    "heading": 248.50851784485994,
+    "pitch": -3.0453350721877115,
+    "zoom": 1.800295274243759,
+    "description": "",
+    "createdAt": "2026-06-12T20:45:29.110Z"
+  },
+  {
+    "id": "_QGjyJqb0RzwqOuOddpV6A",
+    "lat": 48.82259109343436,
+    "lng": 2.139010839782113,
+    "heading": 205.9895371910087,
+    "pitch": -2.181592328081379,
+    "zoom": 2.8941663081693463,
+    "description": "",
+    "createdAt": "2026-06-12T20:45:46.102Z"
+  },
+  {
+    "id": "JTtbnZsfAUvqBLTfnb-XbA",
+    "lat": 48.802731803396604,
+    "lng": 2.1577771310305267,
+    "heading": 128.77204142828631,
+    "pitch": -3.9562298236783278,
+    "zoom": 2.8941663081693463,
+    "description": "Bande cyclable quasi inutile : en descente, elle longe les voitures en stationnement sans le moindre espace tampon.",
+    "createdAt": "2026-06-12T20:46:47.876Z"
+  },
+  {
+    "id": "1hs9AJk8yf0aJr9Psj05nQ",
+    "lat": 48.79800148941599,
+    "lng": 2.134869178027167,
+    "heading": 339.33546864205766,
+    "pitch": -2.8008715560281274,
+    "zoom": 2.8941663081693463,
+    "description": "Nouvelle piste cyclable, carrefour peu traité, un peu de zigzag, mais piste protégée.",
+    "createdAt": "2026-06-12T20:47:20.370Z"
+  },
+  {
+    "id": "mVZfkOM6p1lV_4Lb1Gnnjw",
+    "lat": 48.79994435515131,
+    "lng": 2.132154359926315,
+    "heading": 17.65145153356803,
+    "pitch": -0.7703264113772406,
+    "zoom": 2.8941663081693463,
+    "description": "",
+    "createdAt": "2026-06-12T20:47:48.669Z"
+  },
+  {
+    "id": "Bo7FVD-cEXd4Gc4XfjrJhw",
+    "lat": 48.77955313044276,
+    "lng": 2.1039763909908675,
+    "heading": 46.053427382712506,
+    "pitch": -0.8375793005903063,
+    "zoom": 2.8941663081693463,
+    "description": "",
+    "createdAt": "2026-06-12T20:48:05.899Z"
+  },
+  {
+    "id": "8M3DtJdFTDwev_J2z40RoA",
+    "lat": 48.808390949489265,
+    "lng": 2.146274992215612,
+    "heading": 172.61495021398144,
+    "pitch": -10.295268576369992,
+    "zoom": 1.2179010981881948,
+    "description": "",
+    "createdAt": "2026-06-12T20:48:27.221Z"
+  },
+  {
+    "id": "9TVKnIdz1LGv9FbU3scnEg",
+    "lat": 48.79682004575071,
+    "lng": 2.1391338581656054,
+    "heading": 292.3381384177895,
+    "pitch": -0.47813570463601707,
+    "zoom": 1.3884198930894616,
+    "description": "",
+    "createdAt": "2026-06-12T20:49:08.896Z"
+  },
+  {
+    "id": "bmCvHOV0iUDJleSa1Wskxg",
+    "lat": 48.80903212607851,
+    "lng": 2.146839989628157,
+    "heading": 234.82740131526123,
+    "pitch": -7.729896241601409,
+    "zoom": 1.9801905127655228,
+    "description": "Un pictogramme vélo qui gagnerait à être plus compréhensible.",
+    "createdAt": "2026-06-12T20:49:56.303Z"
+  },
+  {
+    "id": "r-Ar-47JiK6arWR5EIv_cg",
+    "lat": 48.81913595107104,
+    "lng": 2.1345662494859794,
+    "heading": 96.78525178454646,
+    "pitch": 0.3459054425733399,
+    "zoom": 2.01299677674599,
+    "description": "",
+    "createdAt": "2026-06-12T20:50:33.226Z"
+  },
+  {
+    "id": "KNIwvIO09JC-Y_VWLme_qg",
+    "lat": 48.79835033520655,
+    "lng": 2.158219500243949,
+    "heading": 123.43458720406338,
+    "pitch": -8.222025337000943,
+    "zoom": 1.722133609024895,
+    "description": "Absence de continuité cyclable, elle commence un peu au milieu de nulle part.",
+    "createdAt": "2026-06-12T20:51:11.363Z"
+  },
+  {
+    "id": "kfPeiMsXhQSF9h7JX1Xd8Q",
+    "lat": 48.80515803727325,
+    "lng": 2.1521997920444975,
+    "heading": 323.56126004981564,
+    "pitch": -12.070626775526094,
+    "zoom": 0.9207713287507941,
+    "description": "Deux générations de pistes cyclables reliées en biseau.",
+    "createdAt": "2026-06-12T20:51:54.003Z"
+  },
+  {
+    "id": "Ru_gSNDwEBzBywnmxv4o5g",
+    "lat": 48.80859209180875,
+    "lng": 2.1245961579343957,
+    "heading": 110.3282454628299,
+    "pitch": -18.231610198939222,
+    "zoom": 1.3690133317943027,
+    "description": "",
+    "createdAt": "2026-06-12T20:56:17.544Z"
+  },
+  {
+    "id": "w4Ew_ySfwmhuYXfbwrMRcw",
+    "lat": 48.806557042044595,
+    "lng": 2.1488953512727607,
+    "heading": 317.8434297739421,
+    "pitch": -4.032751453039452,
+    "zoom": 1.9952014053543876,
+    "description": "",
+    "createdAt": "2026-06-12T20:56:47.426Z"
+  },
+  {
+    "id": "Is2A17dvA14RtQ9r1GiQ9w",
+    "lat": 48.80532532650831,
+    "lng": 2.13130268809478,
+    "heading": 21.400230068021582,
+    "pitch": -8.113896334845421,
+    "zoom": 2.8941663081693463,
+    "description": "",
+    "createdAt": "2026-06-12T20:57:13.323Z"
+  },
+  {
+    "id": "d8yrpx-trtgIcL6hu4mJKA",
+    "lat": 48.820199464644055,
+    "lng": 2.1408844020261775,
+    "heading": 259.12557117019236,
+    "pitch": -8.201495493295354,
+    "zoom": 1.368093318199313,
+    "description": "",
+    "createdAt": "2026-06-12T20:57:37.969Z"
+  },
+  {
+    "id": "3-RpfzQdtM8xpiuNIqvfmw",
+    "lat": 48.80469507715443,
+    "lng": 2.1305055996825835,
+    "heading": 277.9844883382763,
+    "pitch": -11.139172524400507,
+    "zoom": 1.722133609024895,
+    "description": "",
+    "createdAt": "2026-06-12T20:57:47.256Z"
+  },
+  {
+    "id": "h-sTYGr4QjgWh_DPbmnFJg",
+    "lat": 48.807787905311635,
+    "lng": 2.1458679030633587,
+    "heading": 357.7613270360694,
+    "pitch": -5.2485851630431455,
+    "zoom": 2.5223449497416457,
+    "description": "Piste cyclable qui termine sur un poteau.",
+    "createdAt": "2026-06-12T20:58:07.741Z"
+  },
+  {
+    "id": "ooMZENtR2IpMleoklmRk6w",
+    "lat": 48.80132176064063,
+    "lng": 2.1246230838552753,
+    "heading": 91.23303327923058,
+    "pitch": -3.0708331742713426,
+    "zoom": 2.6861182202618985,
+    "description": "",
+    "createdAt": "2026-06-12T20:58:25.318Z"
+  },
+  {
+    "id": "gH4wHTYVkkZn4TYEvQKbVA",
+    "lat": 48.80167574269354,
+    "lng": 2.116708130479845,
+    "heading": 345.664676788312,
+    "pitch": -12.806729489290007,
+    "zoom": 1.2092689479588103,
+    "description": "",
+    "createdAt": "2026-06-12T20:59:02.952Z"
+  },
+  {
+    "id": "lXT4OJAfNAxNToC_n0zDjA",
+    "lat": 48.81059113451587,
+    "lng": 2.150209310293642,
+    "heading": 57.077686006301654,
+    "pitch": -2.201653984920327,
+    "zoom": 2.5198874243251215,
+    "description": "Uniquement piste en montée, et exposée au flux de circulation pendant quelques mètres. Inconfortable.",
+    "createdAt": "2026-06-12T20:59:45.823Z"
+  },
+  {
+    "id": "HhktGtTYjyOWsQurujUtjA",
+    "lat": 48.80076825931651,
+    "lng": 2.076665366121633,
+    "heading": 61.577310492357284,
+    "pitch": -8.0751300807311,
+    "zoom": 1.3460723924635705,
+    "description": "L'héritage des JO aura montré qu'il est possible de faire des voies réservées, mais qu'il a été décidé de ne pas les garder, malheureusement.",
+    "createdAt": "2026-06-12T21:00:27.317Z"
+  },
+  {
+    "id": "2pOkq5tRXILC2G2apumz7Q",
+    "lat": 48.780347890048915,
+    "lng": 2.0996968177409134,
+    "heading": 152.8633665415209,
+    "pitch": -2.2097968830411077,
+    "zoom": 2.8941663081693463,
+    "description": "Une bande cyclable très peu entretenue.",
+    "createdAt": "2026-06-12T21:00:57.202Z"
+  },
+  {
+    "id": "XES9ELoEpL-aXszP9e31pw",
+    "lat": 48.798039724936814,
+    "lng": 2.1488561676413167,
+    "heading": 73.59395635747597,
+    "pitch": -3.841853917702636,
+    "zoom": 2.8941663081693463,
+    "description": "",
+    "createdAt": "2026-06-12T21:01:29.825Z"
+  },
+  {
+    "id": "xD8QL5txFwJWgNumBR2KiQ",
+    "lat": 48.79387745138135,
+    "lng": 2.124223240660116,
+    "heading": 51.504563282129915,
+    "pitch": -11.280019717346562,
+    "zoom": 1.7002292567524118,
+    "description": "Plusieurs motos stationnées juste avant le passage piéton, là où plus aucun véhicule ne devrait l'être. Un défaut d'aménagement de la voirie.",
+    "createdAt": "2026-06-12T21:02:48.352Z"
+  },
+  {
+    "id": "q2KU8H47w0bi2eFrO7inXA",
+    "lat": 48.78838723620834,
+    "lng": 2.1306743304031865,
+    "heading": 125.20413035985597,
+    "pitch": -12.251074746655576,
+    "zoom": 2.066079275469777,
+    "description": "",
+    "createdAt": "2026-06-12T21:03:29.084Z"
+  },
+  {
+    "id": "gUUQTspRdGigbezuyIxo_A",
+    "lat": 48.79844796491946,
+    "lng": 2.1543817141256945,
+    "heading": 276.2565179789997,
+    "pitch": -7.805236289704752,
+    "zoom": 2.6293932747531326,
+    "description": "",
+    "createdAt": "2026-06-12T21:03:41.435Z"
+  },
+  {
+    "id": "f7cect5pWMuNfQdbS_AE5w",
+    "lat": 48.79525257577671,
+    "lng": 2.1230460807438916,
+    "heading": 202.40119149256296,
+    "pitch": -9.949334589343891,
+    "zoom": 1.6960425598814886,
+    "description": "",
+    "createdAt": "2026-06-12T21:03:58.407Z"
+  },
+  {
+    "id": "QeeAiRkk5GVg18QjlOs--A",
+    "lat": 48.798249037666444,
+    "lng": 2.144528431648105,
+    "heading": 95.784151815029,
+    "pitch": -3.2049704033922666,
+    "zoom": 2.8941663081693463,
+    "description": "Deuxième avenue la plus large de France, seulement de rares passages pour traverser.",
+    "createdAt": "2026-06-12T21:04:46.261Z"
+  },
+  {
+    "id": "Bl3tCqd-ZnGO72-gJ6DKtg",
+    "lat": 48.80096946331749,
+    "lng": 2.076818900959874,
+    "heading": 268.0593189612124,
+    "pitch": -6.88461461532404,
+    "zoom": 2.8941663081693463,
+    "description": "",
+    "createdAt": "2026-06-12T21:05:37.211Z"
+  },
+  {
+    "id": "eLio9qH4CkdJIwWSTkPT7g",
+    "lat": 48.792161074939884,
+    "lng": 2.1526186196630026,
+    "heading": 169.89255326219845,
+    "pitch": -10.532228250491741,
+    "zoom": 0.4227743531312005,
+    "description": "Plutôt réussi : un double-sens cyclable bien protégé. Le virage marqué laisse toutefois une faible visibilité.",
+    "createdAt": "2026-06-12T21:06:29.697Z"
+  },
+  {
+    "id": "ZoPn9G_upQP_OiPO3ZuQtA",
+    "lat": 48.80172258986919,
+    "lng": 2.0871283354801444,
+    "heading": 98.12476175081639,
+    "pitch": -4.532254314906524,
+    "zoom": 2.8941663081693463,
+    "description": "Chemin \"vert\" complètement abandonné depuis des années.",
+    "createdAt": "2026-06-12T21:08:22.967Z"
+  },
+  {
+    "id": "BCBvWr8BnptbOEbhemCX_g",
+    "lat": 48.798453534185704,
+    "lng": 2.157784466215259,
+    "heading": 243.33701574447093,
+    "pitch": -26.735663129271913,
+    "zoom": 0.9410119680530324,
+    "description": "Au-delà d'une lecture difficile, l'aménagement manque de maîtrise : la piste se fond dans la voie générale sans transition claire.",
+    "createdAt": "2026-06-12T21:09:09.297Z"
+  },
+  {
+    "id": "o3vYCXung4Am7_GPLxUdRQ",
+    "lat": 48.80937227066075,
+    "lng": 2.1253205723042976,
+    "heading": 204.20572083036782,
+    "pitch": -4.257377497623565,
+    "zoom": 2.5825290527809592,
+    "description": "",
+    "createdAt": "2026-06-12T21:09:20.124Z"
+  },
+  {
+    "id": "sYsqJDpQ0dK868xmFuBgqg",
+    "lat": 48.7931238630595,
+    "lng": 2.1196342683952807,
+    "heading": 259.735523390949,
+    "pitch": -3.000807979679891,
+    "zoom": 2.5790001027361993,
+    "description": "Trottoir cyclable, très peu roulant.",
+    "createdAt": "2026-06-12T21:10:32.060Z"
+  },
+  {
+    "id": "ns0xCAx0_1S0Ivap83WmwQ",
+    "lat": 48.80255997579148,
+    "lng": 2.135333092791721,
+    "heading": 117.30596884040877,
+    "pitch": -1.4041434793765717,
+    "zoom": 2.4276001134809224,
+    "description": "Piste plutôt bien protégée, mais pas du tout entretenu en hiver.",
+    "createdAt": "2026-06-12T21:11:50.484Z"
+  },
+  {
+    "id": "zsvVf0C7TpGEV8SpcDwsLg",
+    "lat": 48.81542745074784,
+    "lng": 2.1283572717903736,
+    "heading": 179.6452892270747,
+    "pitch": -8.204480529681504,
+    "zoom": 1.8941663081693463,
+    "description": "",
+    "createdAt": "2026-06-12T21:12:24.922Z"
+  },
+  {
+    "id": "RJ8n8ynkgESKyJF34f-XrQ",
+    "lat": 48.8200873876992,
+    "lng": 2.115389898429619,
+    "heading": 325.0139686950885,
+    "pitch": -3.516951649101685,
+    "zoom": 2.8941663081693463,
+    "description": "",
+    "createdAt": "2026-06-12T21:14:03.678Z"
+  },
+  {
+    "id": "FPCxm80cDsNHLK_SwSPqTA",
+    "lat": 48.808441263437814,
+    "lng": 2.1385148609758167,
+    "heading": 116.03353653307168,
+    "pitch": -3.934731387607087,
+    "zoom": 1.422863758250345,
+    "description": "La classique versaillaise : une bande cyclable sur le trottoir, très répandue le long des avenues. Acceptable, mais peu confortable, au tracé haché, parfois en montagnes russes.",
+    "createdAt": "2026-06-12T21:14:59.300Z"
+  },
+  {
+    "id": "D0B0D-1fZbiQlPojdGXP_Q",
+    "lat": 48.81155299305226,
+    "lng": 2.113081844550104,
+    "heading": 298.928075035558,
+    "pitch": -5.854811214619062,
+    "zoom": 2.8941663081693463,
+    "description": "",
+    "createdAt": "2026-06-12T21:16:39.748Z"
+  },
+  {
+    "id": "WdRt3UVjX3R8WkVRhz6V_g",
+    "lat": 48.80836061530377,
+    "lng": 2.1519584980433377,
+    "heading": 2.3727947088534247,
+    "pitch": 3.217549443507508,
+    "zoom": 1.0051165323738784,
+    "description": "",
+    "createdAt": "2026-06-12T21:18:19.969Z"
+  },
+  {
+    "id": "wjolY6vru6epMbq1Zu9nYg",
+    "lat": 48.81315932791177,
+    "lng": 2.1548552746264376,
+    "heading": 354.5805781846299,
+    "pitch": -13.14277264516825,
+    "zoom": 1.1479735377047415,
+    "description": "Peu d'efforts sur les passages de bordure.",
+    "createdAt": "2026-06-12T21:19:21.923Z"
+  },
+  {
+    "id": "nzAQWz1XRLw4lb8_SOm0VA",
+    "lat": 48.80754548916064,
+    "lng": 2.1326292214942772,
+    "heading": 39.421558508042374,
+    "pitch": -8.71046188855965,
+    "zoom": 2.5486041870448073,
+    "description": "",
+    "createdAt": "2026-06-12T21:25:06.864Z"
+  }
+]

@@ -1,0 +1,27 @@
+:root {
+  --bg: #16171d;
+  --panel: #1f2028;
+  --border: #2e303a;
+  --text: #e6e7ea;
+  --muted: #9ca3af;
+  --yes: #2e9e5b;
+  --no: #c0413b;
+  --accent: #2563eb;
+  --orange: #ff7a00; /* dev-only controls */
+  --red: #d83a34; /* destructive actions (matches the guess marker) */
+  --vv: #8fa6c4; /* neutral tint for the VeloVersailles opinion callout */
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+}
