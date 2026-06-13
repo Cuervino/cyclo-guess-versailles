@@ -6,6 +6,7 @@ import {
   submitScore,
   fetchLeaderboard,
 } from "./lib/leaderboard.js";
+import { SENTIMENT } from "./lib/sentiment.js";
 import SPOTS from "./data/spots.json";
 import logoVeloVersailles from "./assets/logo-veloversailles.jpg";
 
@@ -50,6 +51,18 @@ const GAME_PANO_OPTIONS = {
   panControl: false,
 };
 
+// Applied while the result is minimized: let the player look around and move to
+// get their bearings (the opposite of the locked, frozen in-game framing).
+const PANO_UNLOCK = {
+  clickToGo: true,
+  linksControl: true,
+  scrollwheel: true,
+  zoomControl: true,
+  disableDoubleClickZoom: false,
+  showRoadLabels: true,
+  panControl: true,
+};
+
 function shuffled(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -66,6 +79,18 @@ function formatDistance(m) {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })} km`;
+}
+
+// Leaderboard timestamp (ISO string from the sheet) -> "YYYY-MM-DD HH:MM" in the
+// viewer's local time. Empty for rows without a timestamp (the optimistic "you").
+function formatTs(ts) {
+  if (!ts) return "";
+  const d = new Date(ts);
+  if (isNaN(d.getTime())) return "";
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(
+    d.getHours()
+  )}:${p(d.getMinutes())}`;
 }
 
 // Build a Google Maps marker icon from an inline SVG string.
@@ -98,11 +123,13 @@ export default function Game() {
   const [guess, setGuess] = useState(null);
   const [results, setResults] = useState([]); // [{distance, score}]
   const [hovered, setHovered] = useState(false);
+  const hoverTimer = useRef(null); // hover-intent open/close debounce
   const [resizing, setResizing] = useState(false);
   const [gameId, setGameId] = useState(0); // bumps each new game to rebuild maps
   const [name, setName] = useState(() => localStorage.getItem("cgv_name") || "");
   const [submitState, setSubmitState] = useState("idle"); // idle|sending|sent|error
   const [leaderboard, setLeaderboard] = useState(null); // null = not loaded yet
+  const [showBoard, setShowBoard] = useState(false); // leaderboard modal on the landing
   // Expanded (hover) size, resizable + remembered. Collapsed size is fixed.
   const [mapSize, setMapSize] = useState(() => {
     try {
@@ -205,6 +232,16 @@ export default function Game() {
     // render below, so the view stays fixed on the curated framing.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [round, status]);
+
+  // While the result is minimized, unlock the panorama (and drop the lock
+  // overlay, see render) so the player can pan/zoom/move to get their bearings.
+  // Re-lock to the frozen framing otherwise.
+  useEffect(() => {
+    const pano = panoRef.current;
+    if (!pano) return;
+    const explore = phase === "revealed" && minimized;
+    pano.setOptions(explore ? PANO_UNLOCK : GAME_PANO_OPTIONS);
+  }, [phase, minimized, status, round]);
 
   // The guess map (corner), recreated each guessing round.
   useEffect(() => {
@@ -345,6 +382,18 @@ export default function Game() {
   // Effective corner-map size: expanded while hovered or resizing, else small.
   const eff = hovered || resizing ? mapSize : MAP_COLLAPSED;
 
+  // Hover intent: a small open delay avoids accidental expansion when the cursor
+  // just sweeps over, and a longer close delay forgives brief exits / edge wobble.
+  function onCornerEnter() {
+    clearTimeout(hoverTimer.current);
+    hoverTimer.current = setTimeout(() => setHovered(true), 80);
+  }
+  function onCornerLeave() {
+    clearTimeout(hoverTimer.current);
+    hoverTimer.current = setTimeout(() => setHovered(false), 250);
+  }
+  useEffect(() => () => clearTimeout(hoverTimer.current), []);
+
   // Keep the Google map filling its container (and centered) when it resizes.
   useEffect(() => {
     const map = guessMapRef.current;
@@ -400,6 +449,17 @@ export default function Game() {
     // (started resets to false) and fully releases the Google Maps panorama and
     // map instances — more reliable than tearing the React tree down by hand.
     window.location.reload();
+  }
+
+  // Open the leaderboard modal from the landing. Fetch the standings on demand,
+  // since the in-game prefetch only runs once a game has started.
+  function openBoard() {
+    setShowBoard(true);
+    if (leaderboard === null && leaderboardEnabled()) {
+      fetchLeaderboard()
+        .then(setLeaderboard)
+        .catch(() => setLeaderboard([]));
+    }
   }
 
   function next() {
@@ -469,30 +529,104 @@ export default function Game() {
           />
           <h1 className="landing-brand">Cyclo Guessr Versailles</h1>
           <p className="landing-lead">
-            Un jeu de localisation autour des aménagements cyclables de Versailles,
-            bons comme mauvais. À partir d'une photo figée (façon « NMPZ »), place
-            ton point au plus près du lieu réel pour marquer un maximum de points,
-            sur 5 manches. La plupart des spots sont commentés par VeloVersailles.
+            <span>
+              Un jeu de localisation autour des aménagements cyclables de
+              Versailles.
+            </span>
+            <span>
+              À partir d'une photo figée (façon « NMPZ » pour les habitués de
+              Geoguessr), place ton point au plus près du lieu réel pour marquer
+              un maximum de points, sur 5 manches.
+            </span>
+            <span>
+              La plupart des points sont commentés par VeloVersailles.
+            </span>
           </p>
-          <div className="landing-chips">
-            <span className="chip">Photo figée</span>
-            <span className="chip">5 manches</span>
-            <span className="chip">Avis VeloVersailles</span>
-          </div>
           <button className="landing-start" onClick={() => setStarted(true)}>
             Commencer
           </button>
+          {leaderboardEnabled() && (
+            <button className="landing-board-link" onClick={openBoard}>
+              Voir le classement
+            </button>
+          )}
           <p className="landing-disclaimer">
             Les vues proviennent de Google Street View et peuvent dater de plusieurs
-            mois ou années : elles ne reflètent pas forcément l'état actuel des
+            mois ou années{' '}: elles ne reflètent pas forcément l'état actuel des
             aménagements à Versailles.
           </p>
           <p className="landing-disclaimer">
-            Projet bricolé pour le plaisir : l'API Google étant limitée en nombre de
+            Prototype artisanal : l'API Google étant limitée en nombre de
             requêtes, le jeu peut parfois ne pas se lancer. Le classement reste
             temporaire et pourra être remis à zéro.
           </p>
         </div>
+
+        <a
+          className="landing-attribution"
+          href="https://www.cyclosm.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Fond de carte : CyclOSM
+          <svg
+            className="ext-icon"
+            viewBox="0 0 24 24"
+            width="12"
+            height="12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17 17 7" />
+            <path d="M9 7 H17 V15" />
+          </svg>
+        </a>
+
+        {showBoard && (
+          <div className="modal-overlay" onClick={() => setShowBoard(false)}>
+            <div
+              className="modal-card modal-board"
+              role="dialog"
+              aria-modal="true"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="modal-title">Classement</h2>
+              {leaderboard === null ? (
+                <p className="modal-text muted">Chargement du classement…</p>
+              ) : leaderboard.length === 0 ? (
+                <p className="modal-text muted">Aucun score pour l'instant.</p>
+              ) : (
+                <ol className="lb-list">
+                  {[...leaderboard]
+                    .sort((a, b) => b.score - a.score)
+                    .slice(0, 10)
+                    .map((e, i) => (
+                      <li key={i}>
+                        <span className="lb-rank">{i + 1}</span>
+                        <span className="lb-name">{e.name}</span>
+                        <span className="lb-date">{formatTs(e.ts)}</span>
+                        <span className="lb-score">
+                          {e.score.toLocaleString("fr-FR")}
+                        </span>
+                      </li>
+                    ))}
+                </ol>
+              )}
+              <div className="modal-actions">
+                <button
+                  className="modal-primary"
+                  onClick={() => setShowBoard(false)}
+                >
+                  Fermer
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -536,6 +670,7 @@ export default function Game() {
   const total = results.reduce((s, r) => s + r.score, 0);
   const lastResult = results[round];
   const spot = roundSpots[round];
+  const tone = spot ? SENTIMENT[spot.sentiment] : null;
 
   // End-screen derived values.
   const maxTotal = roundSpots.length * 5000;
@@ -553,7 +688,7 @@ export default function Game() {
   return (
     <div className="game">
       <div className="game-pano" ref={panoDivRef} />
-      <div className="pano-lock" />
+      {!(phase === "revealed" && minimized) && <div className="pano-lock" />}
 
       <div className="hud">
         <span>
@@ -572,6 +707,9 @@ export default function Game() {
           <a className="dev-btn" href="#curate">
             curation
           </a>
+          <a className="dev-btn" href="#avis">
+            avis
+          </a>
           {phase !== "finished" && (
             <button className="dev-btn" onClick={devJumpToEnd}>
               écran de fin
@@ -584,8 +722,8 @@ export default function Game() {
         <div
           className={`guess-corner${resizing ? " resizing" : ""}`}
           style={{ width: eff.w }}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseEnter={onCornerEnter}
+          onMouseLeave={onCornerLeave}
         >
           <div className="gmap" style={{ height: eff.h }}>
             <div
@@ -596,7 +734,7 @@ export default function Game() {
             <div className="gmap-inner" ref={guessMapDivRef} />
           </div>
           <button className="validate" onClick={validate} disabled={!guess}>
-            {guess ? "Valider" : "Place ton guess"}
+            {guess ? "Valider" : "Place ton point"}
           </button>
         </div>
       )}
@@ -635,8 +773,11 @@ export default function Game() {
                   <span>à {formatDistance(lastResult.distance)} du lieu</span>
                 </div>
                 {spot.description ? (
-                  <div className="vv-callout">
-                    <div className="vv-label">Avis VeloVersailles</div>
+                  <div className={`vv-callout${tone ? ` vv-toned ${tone.cls}` : ""}`}>
+                    <div className="vv-label">
+                      {tone && <span className="vv-face">{tone.emoji}</span>}
+                      Avis VeloVersailles{tone ? ` · ${tone.label}` : ""}
+                    </div>
                     <p>{spot.description}</p>
                   </div>
                 ) : (
@@ -718,6 +859,7 @@ export default function Game() {
                           <span className="lb-name">
                             {e.you ? (e.name ? `${e.name} (toi)` : "(toi)") : e.name}
                           </span>
+                          <span className="lb-date">{formatTs(e.ts)}</span>
                           <span className="lb-score">{fmt(e.score)}</span>
                         </li>
                       ))}
@@ -729,6 +871,7 @@ export default function Game() {
                             <span className="lb-name">
                               {youName ? `${youName} (toi)` : "(toi)"}
                             </span>
+                            <span className="lb-date" />
                             <span className="lb-score">{fmt(total)}</span>
                           </li>
                         </>

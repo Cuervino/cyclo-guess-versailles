@@ -53,7 +53,7 @@
   position: relative;
   margin: 0 auto 0 6vw;
   padding: 32px;
-  max-width: 480px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -83,6 +83,10 @@
   line-height: 1.6;
   color: #d2d5db;
   max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  /* gap between sentences is larger than the in-sentence line spacing */
+  gap: 9px;
 }
 .landing-chips {
   display: flex;
@@ -114,6 +118,23 @@
 .landing-start:hover {
   filter: brightness(1.08);
 }
+.landing-board-link {
+  align-self: flex-start;
+  margin-top: -4px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  color: #d2d5db;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+.landing-board-link:hover {
+  opacity: 1;
+  color: #fff;
+}
 .landing-disclaimer {
   margin: 0;
   font-size: 12px;
@@ -121,6 +142,30 @@
   color: var(--muted);
   border-left: 2px solid rgba(255, 255, 255, 0.18);
   padding-left: 12px;
+}
+/* Basemap credit, bottom-right over the map backdrop, opens CyclOSM in a new tab. */
+.landing-attribution {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  font-size: 12px;
+  color: #d2d5db;
+  background: rgba(13, 14, 18, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-decoration: none;
+  backdrop-filter: blur(3px);
+}
+.landing-attribution:hover {
+  color: #fff;
+}
+.landing-attribution .ext-icon {
+  flex: 0 0 auto;
 }
 @media (max-width: 600px) {
   .landing-content {
@@ -252,6 +297,127 @@ button.ghost {
   padding: 14px;
 }
 
+/* ---- Curation: free exploration mode ------------------------------------- */
+/* Lock the map height: in a flex column with a long spot list, an empty map
+   would otherwise get shrunk to nothing. */
+.map.map-free {
+  flex: 0 0 400px;
+  height: 400px;
+}
+
+/* Free exploration mode: flexbox layout so the splitter is unambiguous —
+   the pano takes the remaining space, the handle is fixed, the panel width is
+   set inline (and draggable). */
+.workbench.free {
+  display: flex;
+}
+.workbench.free .pano {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Vertical drag handle (fixed 12px flex item). Distinct class name from the
+   game's `.resize-handle` (which is absolute + opacity:0) to avoid inheriting
+   its styles. A grip pill makes it visible against the dark UI and Street View. */
+.workbench.free .panel-resizer {
+  flex: 0 0 12px;
+  cursor: col-resize;
+  background: var(--border);
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.workbench.free .panel-resizer::before {
+  content: "";
+  width: 4px;
+  height: 40px;
+  border-radius: 2px;
+  background: var(--muted);
+}
+.workbench.free .panel-resizer:hover {
+  background: var(--accent, #2563eb);
+}
+.workbench.free .panel-resizer:hover::before {
+  background: #fff;
+}
+
+.panel .hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.panel .notice {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.panel .add {
+  background: var(--accent, #2563eb);
+  border-color: var(--accent, #2563eb);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Capture-year badge over the panorama. */
+.pano-year {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.spot-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.spot-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 4px 6px;
+  margin: 0 -6px;
+  border-radius: 6px;
+  scroll-margin: 8px;
+}
+.spot-list li.selected {
+  background: rgba(255, 122, 0, 0.15);
+  box-shadow: inset 0 0 0 1px var(--orange);
+}
+.spot-list .spot-desc {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text);
+}
+.spot-list .spot-actions {
+  display: flex;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.spot-list .spot-actions button {
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
 /* ---- Game ---------------------------------------------------------------- */
 .game {
   position: relative;
@@ -328,6 +494,25 @@ button.ghost {
   padding: 22px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
+/* Leaderboard modal: wider and taller than the confirm dialog, scrolls if long */
+.modal-board {
+  width: min(560px, 92vw);
+  min-height: min(70vh, 560px);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+.modal-board .lb-list {
+  flex: 1;
+  max-height: none;
+  overflow-y: auto;
+  margin: 8px 0 18px;
+  /* keep the score column off the scrollbar */
+  padding-right: 10px;
+}
+.modal-board .modal-actions {
+  margin-top: auto;
+}
 .modal-title {
   margin: 0 0 8px;
   font-size: 18px;
@@ -356,6 +541,14 @@ button.ghost {
   color: #fff;
 }
 .modal-danger:hover {
+  filter: brightness(1.08);
+}
+.modal-primary {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: #fff;
+}
+.modal-primary:hover {
   filter: brightness(1.08);
 }
 
@@ -406,7 +599,15 @@ button.ghost {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transition: width 0.18s ease;
+  transition: width 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Invisible buffer around the corner widget so the cursor has some tolerance
+   before mouseleave fires (works with the hover-intent delay in JS). */
+.guess-corner::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
 }
 .guess-corner .gmap {
   position: relative;
@@ -415,7 +616,7 @@ button.ghost {
   overflow: hidden;
   background: #0c0d11;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
-  transition: height 0.18s ease;
+  transition: height 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
 /* No animation while actively dragging the handle, so it tracks the cursor. */
 .guess-corner.resizing,
@@ -555,6 +756,9 @@ button.ghost {
   border-radius: 8px;
 }
 .vv-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   margin-bottom: 6px;
   font-size: 13px;
   font-weight: 600;
@@ -564,6 +768,25 @@ button.ghost {
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
+}
+.vv-face {
+  font-size: 17px;
+  line-height: 1;
+}
+/* Sentiment-tinted callout (proposition 1): the whole block takes the verdict
+   hue. --tone is set per level, the shared rules below derive the tints. */
+.vv-s1 { --tone: var(--t1); }
+.vv-s2 { --tone: var(--t2); }
+.vv-s3 { --tone: var(--t3); }
+.vv-s4 { --tone: var(--t4); }
+.vv-s5 { --tone: var(--t5); }
+.vv-toned {
+  background: color-mix(in srgb, var(--tone) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tone) 28%, transparent);
+  border-left: 3px solid var(--tone);
+}
+.vv-toned .vv-label {
+  color: var(--tone);
 }
 .next {
   width: 100%;
@@ -787,11 +1010,17 @@ button.ghost {
 }
 .lb-list li {
   display: grid;
-  grid-template-columns: 28px 1fr auto;
+  grid-template-columns: 28px 1fr auto auto;
   gap: 10px;
   align-items: center;
   padding: 6px 8px;
   border-radius: 6px;
+}
+.lb-date {
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .lb-list li:nth-child(odd) {
   background: rgba(255, 255, 255, 0.03);
@@ -827,6 +1056,29 @@ button.ghost {
   color: var(--text);
 }
 
+/* Shared nav across the dev tools (random curation / free exploration / avis). */
+.devnav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.devnav-link {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.devnav-link:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+.devnav-link.active {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
 /* Centered single-card states (loading, no key, error, done) */
 .screen {
   flex: 1 1 auto;
@@ -860,4 +1112,202 @@ button.ghost {
   font-size: 13px;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* ===========================================================================
+   Avis editor (#avis): a master-detail table of every spot's VeloVersailles
+   opinion. List on the left, Street View + map + edit fields on the right.
+   =========================================================================== */
+.avis-layout {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+}
+.avis-list {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+/* Draggable divider between the table and the edit panel (mirrors the free
+   exploration tool's handle). */
+.avis-resizer {
+  flex: 0 0 12px;
+  cursor: col-resize;
+  background: var(--border);
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.avis-resizer::before {
+  content: "";
+  width: 4px;
+  height: 40px;
+  border-radius: 2px;
+  background: var(--muted);
+}
+.avis-resizer:hover {
+  background: var(--accent);
+}
+.avis-resizer:hover::before {
+  background: #fff;
+}
+.avis-filters {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.avis-search {
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.avis-segmented {
+  display: flex;
+  gap: 6px;
+}
+.avis-segmented button {
+  flex: 1;
+  padding: 7px 10px;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+}
+.avis-segmented button.active {
+  color: var(--text);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.avis-table {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 6px;
+}
+.avis-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.avis-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.avis-row.selected {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.avis-dot {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.avis-dot.vv-s1,
+.avis-dot.vv-s2,
+.avis-dot.vv-s3,
+.avis-dot.vv-s4,
+.avis-dot.vv-s5 {
+  background: color-mix(in srgb, var(--tone) 24%, transparent);
+}
+.avis-text {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.avis-empty {
+  padding: 16px;
+}
+.avis-detail {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  overflow-y: auto;
+  background: var(--panel);
+}
+.avis-placeholder {
+  margin: auto;
+  text-align: center;
+  max-width: 280px;
+  line-height: 1.5;
+}
+.avis-pano {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+.avis-map {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 170px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0c0d11;
+}
+.sent-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sent-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+.sent-emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+.sent-btn.on {
+  border-color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 16%, transparent);
+}
+.sent-none {
+  --tone: var(--muted);
+}
+.sent-none .sent-emoji {
+  color: var(--muted);
+}
+.avis-hint {
+  font-size: 12px;
+  line-height: 1.5;
 }

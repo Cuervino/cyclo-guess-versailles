@@ -10,6 +10,13 @@
   --orange: #ff7a00; /* dev-only controls */
   --red: #d83a34; /* destructive actions (matches the guess marker) */
   --vv: #8fa6c4; /* neutral tint for the VeloVersailles opinion callout */
+  /* VeloVersailles sentiment scale (1 very good -> 5 very bad). Hue carries the
+     verdict, the emoji carries it again so it reads without relying on colour. */
+  --t1: #2ecc71; /* très bon       */
+  --t2: #8bc34a; /* plutôt bon     */
+  --t3: #8fa6c4; /* mitigé / neutre */
+  --t4: #f0a500; /* plutôt mauvais */
+  --t5: #e5533c; /* très mauvais   */
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   color: var(--text);
 }

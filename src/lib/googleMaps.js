@@ -54,6 +54,21 @@ export function applyCyclOSM(google, map) {
   map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(attrib);
 }
 
+// Get the capture date of a panorama by id. Resolves with the raw imageDate
+// string ("YYYY-MM" or "YYYY") or null if unavailable.
+export function panoramaDate(google, panoId) {
+  const service = new google.maps.StreetViewService();
+  return new Promise((resolve) => {
+    service.getPanorama({ pano: panoId }, (data, status) => {
+      if (status === google.maps.StreetViewStatus.OK && data?.imageDate) {
+        resolve(data.imageDate);
+      } else {
+        resolve(null);
+      }
+    });
+  });
+}
+
 // Find the nearest outdoor Street View panorama to a {lat,lng} point.
 // Resolves with { panoId, lat, lng } or null if none within `radius` meters.
 export function nearestPanorama(google, point, radius = 50) {

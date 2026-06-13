@@ -12,6 +12,7 @@ import {
   clearCandidates,
   downloadSpots,
 } from "./lib/storage.js";
+import DevNav from "./DevNav.jsx";
 
 // Fisher-Yates shuffle (returns a new array) so curation jumps around the city
 // instead of walking the network path point by point.
@@ -255,9 +256,7 @@ export default function Curation() {
           {candidatesTotal} candidats
         </span>
         <span className="actions">
-          <a className="link" href="#">
-            ← Jeu
-          </a>
+          <DevNav current="curate" />
           <button onClick={() => downloadSpots(spots)} disabled={!spots.length}>
             Exporter spots.json
           </button>

@@ -14,6 +14,8 @@ dist-ssr
 
 # Local backup files (created during edits, not for the public repo)
 *.bak
+*.bak-*
+*.backup.json
 
 # Private working notes — kept local, never published
 CLAUDE.md

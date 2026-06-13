@@ -6,8 +6,9 @@
     "heading": 141.48476841041122,
     "pitch": -0.3343047385544793,
     "zoom": 2.8941663081693463,
-    "description": "À l'approche de la voie rapide, l'aménagement cyclable est à peine marqué d'un côté, et absent de l'autre.",
-    "createdAt": "2026-06-12T20:43:00.736Z"
+    "description": "Arrivée sur l'autoroute, cyclable très peu marqué d'un côté, absence de pistes cyclables de l'autre côté.",
+    "createdAt": "2026-06-12T20:43:00.736Z",
+    "sentiment": 4
   },
   {
     "id": "WhHlujRWGt13js1KMlZ2jw",
@@ -16,8 +17,9 @@
     "heading": 248.50851784485994,
     "pitch": -3.0453350721877115,
     "zoom": 1.800295274243759,
-    "description": "",
-    "createdAt": "2026-06-12T20:45:29.110Z"
+    "description": "Zone de rencontre.",
+    "createdAt": "2026-06-12T20:45:29.110Z",
+    "sentiment": 2
   },
   {
     "id": "_QGjyJqb0RzwqOuOddpV6A",
@@ -26,8 +28,9 @@
     "heading": 205.9895371910087,
     "pitch": -2.181592328081379,
     "zoom": 2.8941663081693463,
-    "description": "",
-    "createdAt": "2026-06-12T20:45:46.102Z"
+    "description": "Double Sens Cyclable plutôt bien traité.",
+    "createdAt": "2026-06-12T20:45:46.102Z",
+    "sentiment": 2
   },
   {
     "id": "JTtbnZsfAUvqBLTfnb-XbA",
@@ -36,8 +39,9 @@
     "heading": 128.77204142828631,
     "pitch": -3.9562298236783278,
     "zoom": 2.8941663081693463,
-    "description": "Bande cyclable quasi inutile : en descente, elle longe les voitures en stationnement sans le moindre espace tampon.",
-    "createdAt": "2026-06-12T20:46:47.876Z"
+    "description": "Piste cyclable quasiment inutile car en descente et longeant des voitures en stationnement sans écart.",
+    "createdAt": "2026-06-12T20:46:47.876Z",
+    "sentiment": 3
   },
   {
     "id": "1hs9AJk8yf0aJr9Psj05nQ",
@@ -47,7 +51,8 @@
     "pitch": -2.8008715560281274,
     "zoom": 2.8941663081693463,
     "description": "Nouvelle piste cyclable, carrefour peu traité, un peu de zigzag, mais piste protégée.",
-    "createdAt": "2026-06-12T20:47:20.370Z"
+    "createdAt": "2026-06-12T20:47:20.370Z",
+    "sentiment": 3
   },
   {
     "id": "mVZfkOM6p1lV_4Lb1Gnnjw",
@@ -56,8 +61,9 @@
     "heading": 17.65145153356803,
     "pitch": -0.7703264113772406,
     "zoom": 2.8941663081693463,
-    "description": "",
-    "createdAt": "2026-06-12T20:47:48.669Z"
+    "description": "Double Sens Cyclable.",
+    "createdAt": "2026-06-12T20:47:48.669Z",
+    "sentiment": 2
   },
   {
     "id": "Bo7FVD-cEXd4Gc4XfjrJhw",
@@ -66,8 +72,9 @@
     "heading": 46.053427382712506,
     "pitch": -0.8375793005903063,
     "zoom": 2.8941663081693463,
-    "description": "",
-    "createdAt": "2026-06-12T20:48:05.899Z"
+    "description": "Bande cyclable étroite et peu entretenue le long d'une 2x2 voies en pente à 70km/h : pourrait vraiment mieux faire.",
+    "createdAt": "2026-06-12T20:48:05.899Z",
+    "sentiment": 4
   },
   {
     "id": "8M3DtJdFTDwev_J2z40RoA",
@@ -76,8 +83,9 @@
     "heading": 172.61495021398144,
     "pitch": -10.295268576369992,
     "zoom": 1.2179010981881948,
-    "description": "",
-    "createdAt": "2026-06-12T20:48:27.221Z"
+    "description": "Marquage pas totalement lisible, mais voirie plus étroite ici à cause du pont ferroviaire.",
+    "createdAt": "2026-06-12T20:48:27.221Z",
+    "sentiment": 3
   },
   {
     "id": "9TVKnIdz1LGv9FbU3scnEg",
@@ -86,8 +94,9 @@
     "heading": 292.3381384177895,
     "pitch": -0.47813570463601707,
     "zoom": 1.3884198930894616,
-    "description": "",
-    "createdAt": "2026-06-12T20:49:08.896Z"
+    "description": "En test de rue aux Ecoles.",
+    "createdAt": "2026-06-12T20:49:08.896Z",
+    "sentiment": 2
   },
   {
     "id": "bmCvHOV0iUDJleSa1Wskxg",
@@ -96,8 +105,9 @@
     "heading": 234.82740131526123,
     "pitch": -7.729896241601409,
     "zoom": 1.9801905127655228,
-    "description": "Un pictogramme vélo qui gagnerait à être plus compréhensible.",
-    "createdAt": "2026-06-12T20:49:56.303Z"
+    "description": "Picto vélo pour le moins incompréhensible.",
+    "createdAt": "2026-06-12T20:49:56.303Z",
+    "sentiment": 4
   },
   {
     "id": "r-Ar-47JiK6arWR5EIv_cg",
@@ -106,8 +116,9 @@
     "heading": 96.78525178454646,
     "pitch": 0.3459054425733399,
     "zoom": 2.01299677674599,
-    "description": "",
-    "createdAt": "2026-06-12T20:50:33.226Z"
+    "description": "Double Sens Cylable assez bien traité.",
+    "createdAt": "2026-06-12T20:50:33.226Z",
+    "sentiment": 2
   },
   {
     "id": "KNIwvIO09JC-Y_VWLme_qg",
@@ -117,7 +128,8 @@
     "pitch": -8.222025337000943,
     "zoom": 1.722133609024895,
     "description": "Absence de continuité cyclable, elle commence un peu au milieu de nulle part.",
-    "createdAt": "2026-06-12T20:51:11.363Z"
+    "createdAt": "2026-06-12T20:51:11.363Z",
+    "sentiment": 4
   },
   {
     "id": "kfPeiMsXhQSF9h7JX1Xd8Q",
@@ -126,8 +138,9 @@
     "heading": 323.56126004981564,
     "pitch": -12.070626775526094,
     "zoom": 0.9207713287507941,
-    "description": "Deux générations de pistes cyclables reliées en biseau.",
-    "createdAt": "2026-06-12T20:51:54.003Z"
+    "description": "Transition entre l'ancienne piste cyclable et la nouvelle piste cyclable.",
+    "createdAt": "2026-06-12T20:51:54.003Z",
+    "sentiment": 3
   },
   {
     "id": "Ru_gSNDwEBzBywnmxv4o5g",
@@ -136,8 +149,9 @@
     "heading": 110.3282454628299,
     "pitch": -18.231610198939222,
     "zoom": 1.3690133317943027,
-    "description": "",
-    "createdAt": "2026-06-12T20:56:17.544Z"
+    "description": "Double Sens Cyclable plutôt bien traité.",
+    "createdAt": "2026-06-12T20:56:17.544Z",
+    "sentiment": 2
   },
   {
     "id": "w4Ew_ySfwmhuYXfbwrMRcw",
@@ -146,8 +160,9 @@
     "heading": 317.8434297739421,
     "pitch": -4.032751453039452,
     "zoom": 1.9952014053543876,
-    "description": "",
-    "createdAt": "2026-06-12T20:56:47.426Z"
+    "description": "Nouvel axe cyclable, perfectible, mais pratique quand la circulation est bouchée ou pour les familles.",
+    "createdAt": "2026-06-12T20:56:47.426Z",
+    "sentiment": 2
   },
   {
     "id": "Is2A17dvA14RtQ9r1GiQ9w",
@@ -156,8 +171,9 @@
     "heading": 21.400230068021582,
     "pitch": -8.113896334845421,
     "zoom": 2.8941663081693463,
-    "description": "",
-    "createdAt": "2026-06-12T20:57:13.323Z"
+    "description": "Bande le long des voitures en stationnement, trop proche. Et le carrefour n'est vraiment pas rassurant pour les cyclistes.",
+    "createdAt": "2026-06-12T20:57:13.323Z",
+    "sentiment": 3
   },
   {
     "id": "d8yrpx-trtgIcL6hu4mJKA",
@@ -166,8 +182,9 @@
     "heading": 259.12557117019236,
     "pitch": -8.201495493295354,
     "zoom": 1.368093318199313,
-    "description": "",
-    "createdAt": "2026-06-12T20:57:37.969Z"
+    "description": "Un début, mais peu praticable pour les moins expérimentés.",
+    "createdAt": "2026-06-12T20:57:37.969Z",
+    "sentiment": 3
   },
   {
     "id": "3-RpfzQdtM8xpiuNIqvfmw",
@@ -176,8 +193,9 @@
     "heading": 277.9844883382763,
     "pitch": -11.139172524400507,
     "zoom": 1.722133609024895,
-    "description": "",
-    "createdAt": "2026-06-12T20:57:47.256Z"
+    "description": "Les larges avenues permettent une section cyclable. Mais dommage que ça ne soit que de la peinture, et pas un vrai traitement suivant les recommandations.",
+    "createdAt": "2026-06-12T20:57:47.256Z",
+    "sentiment": 2
   },
   {
     "id": "h-sTYGr4QjgWh_DPbmnFJg",
@@ -187,7 +205,8 @@
     "pitch": -5.2485851630431455,
     "zoom": 2.5223449497416457,
     "description": "Piste cyclable qui termine sur un poteau.",
-    "createdAt": "2026-06-12T20:58:07.741Z"
+    "createdAt": "2026-06-12T20:58:07.741Z",
+    "sentiment": 4
   },
   {
     "id": "ooMZENtR2IpMleoklmRk6w",
@@ -196,8 +215,9 @@
     "heading": 91.23303327923058,
     "pitch": -3.0708331742713426,
     "zoom": 2.6861182202618985,
-    "description": "",
-    "createdAt": "2026-06-12T20:58:25.318Z"
+    "description": "Peu de passage, mais pas vraiment aménagé.",
+    "createdAt": "2026-06-12T20:58:25.318Z",
+    "sentiment": 3
   },
   {
     "id": "gH4wHTYVkkZn4TYEvQKbVA",
@@ -206,8 +226,9 @@
     "heading": 345.664676788312,
     "pitch": -12.806729489290007,
     "zoom": 1.2092689479588103,
-    "description": "",
-    "createdAt": "2026-06-12T20:59:02.952Z"
+    "description": "Sortie d'urbanisation. Pour rejoindre la piste cyclable, un effort devrait être fait.",
+    "createdAt": "2026-06-12T20:59:02.952Z",
+    "sentiment": 3
   },
   {
     "id": "lXT4OJAfNAxNToC_n0zDjA",
@@ -217,7 +238,8 @@
     "pitch": -2.201653984920327,
     "zoom": 2.5198874243251215,
     "description": "Uniquement piste en montée, et exposée au flux de circulation pendant quelques mètres. Inconfortable.",
-    "createdAt": "2026-06-12T20:59:45.823Z"
+    "createdAt": "2026-06-12T20:59:45.823Z",
+    "sentiment": 4
   },
   {
     "id": "HhktGtTYjyOWsQurujUtjA",
@@ -227,7 +249,8 @@
     "pitch": -8.0751300807311,
     "zoom": 1.3460723924635705,
     "description": "L'héritage des JO aura montré qu'il est possible de faire des voies réservées, mais qu'il a été décidé de ne pas les garder, malheureusement.",
-    "createdAt": "2026-06-12T21:00:27.317Z"
+    "createdAt": "2026-06-12T21:00:27.317Z",
+    "sentiment": 4
   },
   {
     "id": "2pOkq5tRXILC2G2apumz7Q",
@@ -236,8 +259,9 @@
     "heading": 152.8633665415209,
     "pitch": -2.2097968830411077,
     "zoom": 2.8941663081693463,
-    "description": "Une bande cyclable très peu entretenue.",
-    "createdAt": "2026-06-12T21:00:57.202Z"
+    "description": "Bande cyclable qui n'est jamais bien entretenue.",
+    "createdAt": "2026-06-12T21:00:57.202Z",
+    "sentiment": 4
   },
   {
     "id": "XES9ELoEpL-aXszP9e31pw",
@@ -246,8 +270,9 @@
     "heading": 73.59395635747597,
     "pitch": -3.841853917702636,
     "zoom": 2.8941663081693463,
-    "description": "",
-    "createdAt": "2026-06-12T21:01:29.825Z"
+    "description": "Très large avenue, mais mériterait une meilleure continuité et un meilleur traitement des carrefours.",
+    "createdAt": "2026-06-12T21:01:29.825Z",
+    "sentiment": 2
   },
   {
     "id": "xD8QL5txFwJWgNumBR2KiQ",
@@ -256,8 +281,9 @@
     "heading": 51.504563282129915,
     "pitch": -11.280019717346562,
     "zoom": 1.7002292567524118,
-    "description": "Plusieurs motos stationnées juste avant le passage piéton, là où plus aucun véhicule ne devrait l'être. Un défaut d'aménagement de la voirie.",
-    "createdAt": "2026-06-12T21:02:48.352Z"
+    "description": "Moto en amont de passage piéton.",
+    "createdAt": "2026-06-12T21:02:48.352Z",
+    "sentiment": 3
   },
   {
     "id": "q2KU8H47w0bi2eFrO7inXA",
@@ -266,8 +292,9 @@
     "heading": 125.20413035985597,
     "pitch": -12.251074746655576,
     "zoom": 2.066079275469777,
-    "description": "",
-    "createdAt": "2026-06-12T21:03:29.084Z"
+    "description": "Praticable pour les vélos.",
+    "createdAt": "2026-06-12T21:03:29.084Z",
+    "sentiment": 3
   },
   {
     "id": "gUUQTspRdGigbezuyIxo_A",
@@ -276,8 +303,9 @@
     "heading": 276.2565179789997,
     "pitch": -7.805236289704752,
     "zoom": 2.6293932747531326,
-    "description": "",
-    "createdAt": "2026-06-12T21:03:41.435Z"
+    "description": "Pis-aller, malgré la largeur exceptionnelle de l'avenue et le tracé du réseau cyclable à haut niveau de service (le VIF).",
+    "createdAt": "2026-06-12T21:03:41.435Z",
+    "sentiment": 4
   },
   {
     "id": "f7cect5pWMuNfQdbS_AE5w",
@@ -286,8 +314,9 @@
     "heading": 202.40119149256296,
     "pitch": -9.949334589343891,
     "zoom": 1.6960425598814886,
-    "description": "",
-    "createdAt": "2026-06-12T21:03:58.407Z"
+    "description": "Notons les vélos accrochés au mobilier urbain (malgré une offre assez importante en stationnement pour vélos).",
+    "createdAt": "2026-06-12T21:03:58.407Z",
+    "sentiment": 3
   },
   {
     "id": "QeeAiRkk5GVg18QjlOs--A",
@@ -296,8 +325,9 @@
     "heading": 95.784151815029,
     "pitch": -3.2049704033922666,
     "zoom": 2.8941663081693463,
-    "description": "Deuxième avenue la plus large de France, seulement de rares passages pour traverser.",
-    "createdAt": "2026-06-12T21:04:46.261Z"
+    "description": "Deuxième avenue la plus large de France, mais seulement de rares passages pour traverser.",
+    "createdAt": "2026-06-12T21:04:46.261Z",
+    "sentiment": 4
   },
   {
     "id": "Bl3tCqd-ZnGO72-gJ6DKtg",
@@ -306,8 +336,9 @@
     "heading": 268.0593189612124,
     "pitch": -6.88461461532404,
     "zoom": 2.8941663081693463,
-    "description": "",
-    "createdAt": "2026-06-12T21:05:37.211Z"
+    "description": "Période de travaux, mais la continuité cyclable mériterait d'être mieux matérialisée.",
+    "createdAt": "2026-06-12T21:05:37.211Z",
+    "sentiment": 3
   },
   {
     "id": "eLio9qH4CkdJIwWSTkPT7g",
@@ -316,8 +347,9 @@
     "heading": 169.89255326219845,
     "pitch": -10.532228250491741,
     "zoom": 0.4227743531312005,
-    "description": "Plutôt réussi : un double-sens cyclable bien protégé. Le virage marqué laisse toutefois une faible visibilité.",
-    "createdAt": "2026-06-12T21:06:29.697Z"
+    "description": "Plutôt bien, mise en protection pour un double sens cyclable avec virage important.",
+    "createdAt": "2026-06-12T21:06:29.697Z",
+    "sentiment": 2
   },
   {
     "id": "ZoPn9G_upQP_OiPO3ZuQtA",
@@ -327,7 +359,8 @@
     "pitch": -4.532254314906524,
     "zoom": 2.8941663081693463,
     "description": "Chemin \"vert\" complètement abandonné depuis des années.",
-    "createdAt": "2026-06-12T21:08:22.967Z"
+    "createdAt": "2026-06-12T21:08:22.967Z",
+    "sentiment": 4
   },
   {
     "id": "BCBvWr8BnptbOEbhemCX_g",
@@ -336,8 +369,9 @@
     "heading": 243.33701574447093,
     "pitch": -26.735663129271913,
     "zoom": 0.9410119680530324,
-    "description": "Au-delà d'une lecture difficile, l'aménagement manque de maîtrise : la piste se fond dans la voie générale sans transition claire.",
-    "createdAt": "2026-06-12T21:09:09.297Z"
+    "description": "Lecture difficile, la bande cyclable devient voie générale, cela manque de clarté.",
+    "createdAt": "2026-06-12T21:09:09.297Z",
+    "sentiment": 4
   },
   {
     "id": "o3vYCXung4Am7_GPLxUdRQ",
@@ -346,8 +380,9 @@
     "heading": 204.20572083036782,
     "pitch": -4.257377497623565,
     "zoom": 2.5825290527809592,
-    "description": "",
-    "createdAt": "2026-06-12T21:09:20.124Z"
+    "description": "Zone de circulation dense, hostile. Heureusement, possible de prendre la contre-allée, mais ça n'est que pour quelques dizaines de mètres.",
+    "createdAt": "2026-06-12T21:09:20.124Z",
+    "sentiment": 4
   },
   {
     "id": "sYsqJDpQ0dK868xmFuBgqg",
@@ -357,7 +392,8 @@
     "pitch": -3.000807979679891,
     "zoom": 2.5790001027361993,
     "description": "Trottoir cyclable, très peu roulant.",
-    "createdAt": "2026-06-12T21:10:32.060Z"
+    "createdAt": "2026-06-12T21:10:32.060Z",
+    "sentiment": 4
   },
   {
     "id": "ns0xCAx0_1S0Ivap83WmwQ",
@@ -367,7 +403,8 @@
     "pitch": -1.4041434793765717,
     "zoom": 2.4276001134809224,
     "description": "Piste plutôt bien protégée, mais pas du tout entretenu en hiver.",
-    "createdAt": "2026-06-12T21:11:50.484Z"
+    "createdAt": "2026-06-12T21:11:50.484Z",
+    "sentiment": 3
   },
   {
     "id": "zsvVf0C7TpGEV8SpcDwsLg",
@@ -376,8 +413,9 @@
     "heading": 179.6452892270747,
     "pitch": -8.204480529681504,
     "zoom": 1.8941663081693463,
-    "description": "",
-    "createdAt": "2026-06-12T21:12:24.922Z"
+    "description": "De nombreuses traversées cyclables matérialisées à côté des traversées piétonnes. Un signal mixte piéton cycle permettrait de clarifier le régime de priorité des cyclistes sur ce type d'intersections.",
+    "createdAt": "2026-06-12T21:12:24.922Z",
+    "sentiment": 2
   },
   {
     "id": "RJ8n8ynkgESKyJF34f-XrQ",
@@ -386,8 +424,9 @@
     "heading": 325.0139686950885,
     "pitch": -3.516951649101685,
     "zoom": 2.8941663081693463,
-    "description": "",
-    "createdAt": "2026-06-12T21:14:03.678Z"
+    "description": "Les continuités cyclables avec les autres villes sont de qualité diverses.",
+    "createdAt": "2026-06-12T21:14:03.678Z",
+    "sentiment": 3
   },
   {
     "id": "FPCxm80cDsNHLK_SwSPqTA",
@@ -396,8 +435,9 @@
     "heading": 116.03353653307168,
     "pitch": -3.934731387607087,
     "zoom": 1.422863758250345,
-    "description": "La classique versaillaise : une bande cyclable sur le trottoir, très répandue le long des avenues. Acceptable, mais peu confortable, au tracé haché, parfois en montagnes russes.",
-    "createdAt": "2026-06-12T21:14:59.300Z"
+    "description": "La classique, la bande cyclable sur trottoir. Acceptable, mais manque de confort. Trajet assez hachuré, parfois montagne russe.",
+    "createdAt": "2026-06-12T21:14:59.300Z",
+    "sentiment": 3
   },
   {
     "id": "D0B0D-1fZbiQlPojdGXP_Q",
@@ -406,8 +446,9 @@
     "heading": 298.928075035558,
     "pitch": -5.854811214619062,
     "zoom": 2.8941663081693463,
-    "description": "",
-    "createdAt": "2026-06-12T21:16:39.748Z"
+    "description": "Le domaine du parc du chateau est aussi un espace de circulation pour les cycles.",
+    "createdAt": "2026-06-12T21:16:39.748Z",
+    "sentiment": 3
   },
   {
     "id": "WdRt3UVjX3R8WkVRhz6V_g",
@@ -416,8 +457,9 @@
     "heading": 2.3727947088534247,
     "pitch": 3.217549443507508,
     "zoom": 1.0051165323738784,
-    "description": "",
-    "createdAt": "2026-06-12T21:18:19.969Z"
+    "description": "Rue en forte pente, et aucune aménagement.",
+    "createdAt": "2026-06-12T21:18:19.969Z",
+    "sentiment": 4
   },
   {
     "id": "wjolY6vru6epMbq1Zu9nYg",
@@ -427,7 +469,8 @@
     "pitch": -13.14277264516825,
     "zoom": 1.1479735377047415,
     "description": "Peu d'efforts sur les passages de bordure.",
-    "createdAt": "2026-06-12T21:19:21.923Z"
+    "createdAt": "2026-06-12T21:19:21.923Z",
+    "sentiment": 4
   },
   {
     "id": "nzAQWz1XRLw4lb8_SOm0VA",
@@ -436,7 +479,624 @@
     "heading": 39.421558508042374,
     "pitch": -8.71046188855965,
     "zoom": 2.5486041870448073,
-    "description": "",
-    "createdAt": "2026-06-12T21:25:06.864Z"
+    "description": "Des pistes assez protégées, heureusement étant donné l'affluence et la tendance de certains véhicules de s'accaparer des espaces qui leur sont pourtant interdit.",
+    "createdAt": "2026-06-12T21:25:06.864Z",
+    "sentiment": 2
+  },
+  {
+    "id": "CAoSF0NJSE0wb2dLRUlDQWdJQzQ3NE9fM0FF",
+    "lat": 48.81226002952864,
+    "lng": 2.1272720888635366,
+    "heading": 219.8259956578394,
+    "pitch": -9.03101490178399,
+    "zoom": 1.1055593862560409,
+    "description": "Une piste à clable certes protégée, mais avec un carrefour très peu confortable car effet de montagne russe, à comparer avec la voie générale à droite ou complètement lisse, un vrai billard.",
+    "createdAt": "2026-06-13T13:58:58.167Z",
+    "sentiment": 3
+  },
+  {
+    "id": "QHpqWUPIVxuUtV7-wWLXiw",
+    "lat": 48.80652004121882,
+    "lng": 2.160798116849203,
+    "heading": 272.9799492242465,
+    "pitch": -3.712744198783426,
+    "zoom": 2.3933102973101086,
+    "description": "Piste cyclable sur trottoir très inconfortable, même si dans une rue assez peu passante.",
+    "createdAt": "2026-06-13T14:16:17.433Z",
+    "sentiment": 4
+  },
+  {
+    "id": "8Nt2QUIEoblT3UY0fYNJuA",
+    "lat": 48.80099170048608,
+    "lng": 2.1357589673260406,
+    "heading": 187.49194932197133,
+    "pitch": -4.57603650623976,
+    "zoom": 1.0961867219507397,
+    "description": "Panneau traversée de cyclistes !",
+    "createdAt": "2026-06-13T14:17:11.839Z",
+    "sentiment": 3
+  },
+  {
+    "id": "ienWaMS0kh6QzOgsR36QYw",
+    "lat": 48.80571218113139,
+    "lng": 2.1277134658323926,
+    "heading": 343.0335114564293,
+    "pitch": -10.292372278556329,
+    "zoom": 1.5572979760259462,
+    "description": "Un carrefour assez spécial, qui nécessite de la clareté pour certains cyclistes, pour éviter un contresens dangereux.",
+    "createdAt": "2026-06-13T14:17:50.004Z",
+    "sentiment": 2
+  },
+  {
+    "id": "qdhAEw0CpYoRFORJ5NpnNA",
+    "lat": 48.7984819112152,
+    "lng": 2.1557749112626894,
+    "heading": 267.7262184787854,
+    "pitch": -8.045903103369412,
+    "zoom": 1.6037576485660257,
+    "description": "Une coupure dans l'axe prioritaire, une piste très peu confortable sur trottoir défoncé.",
+    "createdAt": "2026-06-13T14:19:12.615Z",
+    "sentiment": 4
+  },
+  {
+    "id": "zfRpwptGRs_m5dUHbmLaLw",
+    "lat": 48.79964791971219,
+    "lng": 2.1244010976128496,
+    "heading": 24.05439152917018,
+    "pitch": -6.820276022069621,
+    "zoom": 2.8839824288633262,
+    "description": "Double sens cyclable protégé.",
+    "createdAt": "2026-06-13T14:41:44.211Z",
+    "sentiment": 2
+  },
+  {
+    "id": "nYXqYxeOZICHv5v69zDz9g",
+    "lat": 48.79375087793873,
+    "lng": 2.157649028596567,
+    "heading": 320.00082109164805,
+    "pitch": -10.539207158432191,
+    "zoom": 2.091448210960178,
+    "description": "Très peu d'espace pour ce double sens cyclable et pourtant sur une véloroute importante.",
+    "createdAt": "2026-06-13T14:43:36.399Z",
+    "sentiment": 4
+  },
+  {
+    "id": "RuCTarahhg0Kl2tvypLBmA",
+    "lat": 48.81680748510475,
+    "lng": 2.1355968168449775,
+    "heading": 93.72724117775589,
+    "pitch": -3.4359148171066067,
+    "zoom": 1.6636744048245031,
+    "description": "Des chevrons au sol, pas trop proche de la bordure, rappellent aux automobile les trajectoires cyclables.",
+    "createdAt": "2026-06-13T14:48:35.603Z",
+    "sentiment": 2
+  },
+  {
+    "id": "y2HDWSQewVSxf3dg5sVnzA",
+    "lat": 48.806982215542085,
+    "lng": 2.1239637711295676,
+    "heading": 196.25559021352527,
+    "pitch": -1.9130681799836537,
+    "zoom": 1.942866035606759,
+    "description": "Une bande cyclable à la remontée. \nÇa reste fortement acollé à la circulation automobile, mais c'est mieux que rien.",
+    "createdAt": "2026-06-13T14:51:39.550Z",
+    "sentiment": 3
+  },
+  {
+    "id": "Le2KLLOADCA3pAmpf5kp_w",
+    "lat": 48.82556385562381,
+    "lng": 2.143074614499605,
+    "heading": 107.56254492163967,
+    "pitch": -8.971842086427301,
+    "zoom": 0.8053618443841181,
+    "description": "Une vélo-école se cache quelques mètres plus loin de ce chemin à droite !",
+    "createdAt": "2026-06-13T14:56:23.863Z",
+    "sentiment": 2
+  },
+  {
+    "id": "BzZFOS0U6IwNN6QTZHo_jA",
+    "lat": 48.80451895168854,
+    "lng": 2.1463224300568164,
+    "heading": 54.699615048115774,
+    "pitch": -5.355814773034012,
+    "zoom": 1.84594967105552,
+    "description": "Toute la rue de Montreuil non commerçante est en double sens cyclable, très pratique pour la desserte cyclable du quartier pour les résidents.",
+    "createdAt": "2026-06-13T14:58:32.177Z",
+    "sentiment": 2
+  },
+  {
+    "id": "T1aQ1BeCO98DVf5uMlgC5g",
+    "lat": 48.79547918313486,
+    "lng": 2.1326324972506265,
+    "heading": 308.229191833454,
+    "pitch": -9.13113829066883,
+    "zoom": 1,
+    "description": "Proche de la gare routière, un réaménagement qui a pris en compte des pistes cyclables.",
+    "createdAt": "2026-06-13T14:59:46.949Z",
+    "sentiment": 2
+  },
+  {
+    "id": "qxc5IbsIhVPw93bwEwdO5w",
+    "lat": 48.8069723637675,
+    "lng": 2.0766266238178703,
+    "heading": 165.9436381947767,
+    "pitch": -5.907614939527846,
+    "zoom": 1.0001206033153545,
+    "description": "Dépose-minute, à proximité du nouveau quartier Gally.",
+    "createdAt": "2026-06-13T15:01:45.211Z",
+    "sentiment": 3
+  },
+  {
+    "id": "ZsSJh5ekPmmkoIkL-BJuYQ",
+    "lat": 48.79446643705572,
+    "lng": 2.137839204702596,
+    "heading": 206.92475852661983,
+    "pitch": 0.2030178510470506,
+    "zoom": 1.7796414075592315,
+    "description": "Zone en travaux, difficile de circulation à présent. Heureusement, une piste cyclable permet de souffler un peu plus loin.",
+    "createdAt": "2026-06-13T15:02:53.619Z",
+    "sentiment": 3
+  },
+  {
+    "id": "dgGiEzUibqfRdrcaxC-6AQ",
+    "lat": 48.79480745121311,
+    "lng": 2.1406019804426504,
+    "heading": 116.89611765152142,
+    "pitch": -9.603379370333485,
+    "zoom": 1.7798770744274441,
+    "description": "Une zone de forte circulation, départementale, très repoussante pour les cyclistes.",
+    "createdAt": "2026-06-13T15:03:32.274Z",
+    "sentiment": 4
+  },
+  {
+    "id": "tHK7UVs6xSboO1hi2Y8krQ",
+    "lat": 48.80554492953949,
+    "lng": 2.141847437991793,
+    "heading": 259.8593009982341,
+    "pitch": -9.383805872588198,
+    "zoom": 0.9448602028848412,
+    "description": "Traversée difficile pour les cyclistes. \nLes automobilistes, en voyant le feu vert, ne respectent pas du tout la traversée et même accélèrent.",
+    "createdAt": "2026-06-13T15:04:52.447Z",
+    "sentiment": 5
+  },
+  {
+    "id": "bUbT7Jm6DnKqR2B7SY0b5Q",
+    "lat": 48.81038878723562,
+    "lng": 2.1343628097188354,
+    "heading": 9.004941928049284,
+    "pitch": -21.21992646137346,
+    "zoom": 0.9448602028848412,
+    "description": "Piste cyclable protégée, mais quelque peu étroite, empêchant le dépassement.",
+    "createdAt": "2026-06-13T15:05:28.433Z",
+    "sentiment": 3
+  },
+  {
+    "id": "f0MXF27W8EvNhG50nLCSiQ",
+    "lat": 48.811294133874576,
+    "lng": 2.130420203253648,
+    "heading": 7.345972946860769,
+    "pitch": -7.061803638015078,
+    "zoom": 1.5331590590756552,
+    "description": "Le Double Sens Cyclable est rappelé (même si ici il se confond un peu avec le caniveau).",
+    "createdAt": "2026-06-13T15:07:00.448Z",
+    "sentiment": 2
+  },
+  {
+    "id": "dLI5Jt72k867k_-azFF39w",
+    "lat": 48.81047755678067,
+    "lng": 2.1440330778326935,
+    "heading": 310.9104488977748,
+    "pitch": -9.420014125107045,
+    "zoom": 1.5331590590756552,
+    "description": "Double-voie de stationnement, aucun aménagement cyclable. Décevant.",
+    "createdAt": "2026-06-13T15:07:35.862Z",
+    "sentiment": 5
+  },
+  {
+    "id": "p8fF0xkqhhrOsrWjZoKcBg",
+    "lat": 48.81772538969002,
+    "lng": 2.147360448612375,
+    "heading": 124.3361443476225,
+    "pitch": -3.9782006437599335,
+    "zoom": 1.3924757288225589,
+    "description": "Une avenue à forte pente",
+    "createdAt": "2026-06-13T15:08:34.496Z",
+    "sentiment": 4
+  },
+  {
+    "id": "rWUv_vsUgeBGyEKiPq7fdw",
+    "lat": 48.81404503276834,
+    "lng": 2.1360927426671754,
+    "heading": 359.7656629343906,
+    "pitch": -5.871498157656319,
+    "zoom": 1.0037301528622538,
+    "description": "L'expérimentation de la chaucidou n'aura duré que quelques années. Mais le retrait du stationnement offre beaucoup d'apaisement.",
+    "createdAt": "2026-06-13T15:11:16.356Z",
+    "sentiment": 2
+  },
+  {
+    "id": "5QWtYdsSFGPBhWeN3uGnFQ",
+    "lat": 48.80053071005425,
+    "lng": 2.132278505248778,
+    "heading": 178.78295259905644,
+    "pitch": -4.122071669611245,
+    "zoom": 1.8364427172732771,
+    "description": "Enfin, une voie protégée pour les cyclistes dans la rue des États généraux (malgré quelques imperfections).",
+    "createdAt": "2026-06-13T15:13:25.874Z",
+    "sentiment": 2
+  },
+  {
+    "id": "0W1ZPVdT8FGcBVrrY-sS9w",
+    "lat": 48.798334434757116,
+    "lng": 2.152765755494603,
+    "heading": 93.34953441317968,
+    "pitch": -7.773869122476327,
+    "zoom": 3.1124106391414035,
+    "description": "Abandon de la bande cyclable au niveau du carrefour. Très difficile pour les vélos d'accéder à leur sas.",
+    "createdAt": "2026-06-13T15:14:25.997Z",
+    "sentiment": 4
+  },
+  {
+    "id": "rcmK-QscAhqKs0XcxT5ERw",
+    "lat": 48.801887115723474,
+    "lng": 2.1491879627472295,
+    "heading": 171.87859730813418,
+    "pitch": -4.547653833493769,
+    "zoom": 2.3965980307600327,
+    "description": "Un double sens cyclable très récent.",
+    "createdAt": "2026-06-13T15:15:12.429Z",
+    "sentiment": 2
+  },
+  {
+    "id": "Eh4OEkuQqbN2Aqnf4-EjgA",
+    "lat": 48.81796217150469,
+    "lng": 2.1208423761520523,
+    "heading": 92.11313016373757,
+    "pitch": -9.736438816119374,
+    "zoom": 1.1715322527902516,
+    "description": "Contre-allée à surface rugueuse, mais à distance d'un flux de circulation intense.",
+    "createdAt": "2026-06-13T15:16:24.847Z",
+    "sentiment": 3
+  },
+  {
+    "id": "XGt2PY9d0eJftrR6MTOy-A",
+    "lat": 48.8157372771263,
+    "lng": 2.1412403847932717,
+    "heading": 358.06885203440555,
+    "pitch": -10.070909473937178,
+    "zoom": 1.3530328874653041,
+    "description": "Partie nord de Versailles un peu moins bien lotie en termes d'aménagement. \nAssez résidentiel, mais certaines certains axes sont fréquentés en période de pointe.",
+    "createdAt": "2026-06-13T15:17:43.366Z",
+    "sentiment": 3
+  },
+  {
+    "id": "G_VxI0m7O4lRIksjpv7kcg",
+    "lat": 48.81012388218058,
+    "lng": 2.1580605702630473,
+    "heading": 252.49243270298334,
+    "pitch": -9.40358213725375,
+    "zoom": 0.7018762913188759,
+    "description": "Une entrée de ville assez discrète, à proximité de la forêt. \nUne grande partie de Versailles est en zone 30.",
+    "createdAt": "2026-06-13T15:18:48.258Z",
+    "sentiment": 2
+  },
+  {
+    "id": "diPEwYBrOEHeLpBVka_PGg",
+    "lat": 48.80588519252118,
+    "lng": 2.1395618046676756,
+    "heading": 1.4975063672028965,
+    "pitch": -5.267181468951577,
+    "zoom": 2.4273338171976664,
+    "description": "La rue de Provence, toujours à 50 km/h, n'a pas du tout d'aménagement cyclable, malgré la présence du groupe scolaire Hoche.",
+    "createdAt": "2026-06-13T15:19:28.042Z",
+    "sentiment": 5
+  },
+  {
+    "id": "J4dYkvDtYkSgTOwum2I9Hw",
+    "lat": 48.80740349463798,
+    "lng": 2.1291589165815266,
+    "heading": 257.77476210982843,
+    "pitch": -8.996358846882472,
+    "zoom": 1.342011312427796,
+    "description": "Une rue bien commerçante, et de nombreux stationnements en vélo !",
+    "createdAt": "2026-06-13T15:20:19.032Z",
+    "sentiment": 2
+  },
+  {
+    "id": "1Khrx-ixIjTyTlD0-3XVpA",
+    "lat": 48.80332769888397,
+    "lng": 2.1266559616958007,
+    "heading": 348.1043771732171,
+    "pitch": -3.67283358132444,
+    "zoom": 1.2889567860486375,
+    "description": "Le parking du château est très dense en véhicules motorisés. \nLes vélos peuvent circuler sur le trottoir malgré quelques conflits d'usage avec les touristes nonchalants.",
+    "createdAt": "2026-06-13T15:22:55.782Z",
+    "sentiment": 3
+  },
+  {
+    "id": "P2QE-mp_SPL25kRj6k__tQ",
+    "lat": 48.803246344660764,
+    "lng": 2.1230214378009324,
+    "heading": 287.4242253401853,
+    "pitch": -4.071623187378947,
+    "zoom": 2.0001256471174775,
+    "description": "La montée dispose au moins d'une bande cyclable.",
+    "createdAt": "2026-06-13T15:23:33.571Z",
+    "sentiment": 3
+  },
+  {
+    "id": "b6_c_eUZO4Et6ZTR7t0_yQ",
+    "lat": 48.796352598568355,
+    "lng": 2.15441514338839,
+    "heading": 337.96048780664484,
+    "pitch": -1.6507895765502525,
+    "zoom": 2.9076548455024,
+    "description": "Une bande cyclable efficace, d'autant plus que cet axe est parfois bouché par les véhicules motorisés.",
+    "createdAt": "2026-06-13T15:24:25.700Z",
+    "sentiment": 2
+  },
+  {
+    "id": "pyIWKWELnfMO00xhNHRRYQ",
+    "lat": 48.786540364643216,
+    "lng": 2.1523899907394823,
+    "heading": 325.6481364611915,
+    "pitch": -10.600719616504378,
+    "zoom": 1.3660296284346094,
+    "description": "Une entrée du ville tranquille et qui permet aux cyclistes une transition sécurisée avec Vélizy et Les Loges.",
+    "createdAt": "2026-06-13T15:25:59.856Z",
+    "sentiment": 2
+  },
+  {
+    "id": "liyMspPb3RpiIDbEiQh-sg",
+    "lat": 48.78618257925155,
+    "lng": 2.1046035077736267,
+    "heading": 331.05726204607595,
+    "pitch": -0.16767941892904048,
+    "zoom": 0.7926971307146453,
+    "description": "Un tout nouveau quartier qui sort de terre.",
+    "createdAt": "2026-06-13T15:27:26.626Z",
+    "sentiment": 3
+  },
+  {
+    "id": "J7tnZhPgM90UxvVcOelTOg",
+    "lat": 48.79041955658555,
+    "lng": 2.118270198363232,
+    "heading": 208.7966436944178,
+    "pitch": 2.8877204946621617,
+    "zoom": 2.435484634055972,
+    "description": "Accès à Satory difficile : montée importante, pas d'amémangements cyclables.",
+    "createdAt": "2026-06-13T15:28:55.898Z",
+    "sentiment": 4
+  },
+  {
+    "id": "_i3BoEGX8Hzenl03fU-uSw",
+    "lat": 48.816181675037235,
+    "lng": 2.078745721261981,
+    "heading": 114.29874162138526,
+    "pitch": -4.623518004264554,
+    "zoom": 1.956866398147183,
+    "description": "La grille de l'Etoile royale qui permet enfin aux cyclistes de passer par le parc du chateau.",
+    "createdAt": "2026-06-13T15:34:24.223Z",
+    "sentiment": 2
+  },
+  {
+    "id": "icbeQ5iNRIkMg25zdUmo7w",
+    "lat": 48.79886123218536,
+    "lng": 2.123912772052182,
+    "heading": 199.77739384807674,
+    "pitch": -2.8191425455664216,
+    "zoom": 1.7730640523035377,
+    "description": "Pas d'aménagement sur la D91 qui longe le Potager du Roi.",
+    "createdAt": "2026-06-13T15:36:25.817Z",
+    "sentiment": 4
+  },
+  {
+    "id": "lYJjnpaiFFJoH_5-h_nmKQ",
+    "lat": 48.797233987593906,
+    "lng": 2.131461805591388,
+    "heading": 122.25486003354135,
+    "pitch": -3.458600984269708,
+    "zoom": 0.7476575251821127,
+    "description": "Des carrefours qui prennent en compte les flux cyclistes.",
+    "createdAt": "2026-06-13T15:37:39.240Z",
+    "sentiment": 2
+  },
+  {
+    "id": "iTUUUlJPvEssUO2XC96Jkw",
+    "lat": 48.80002257378582,
+    "lng": 2.1283943405245553,
+    "heading": 16.756146522720698,
+    "pitch": 4.198020694159055,
+    "zoom": 1.4623438669260742,
+    "description": "L'office de tourisme qui fait face à la gare Versailles Château. \nLe couloir de bus permet une relative sécurité à la remontée.",
+    "createdAt": "2026-06-13T15:38:44.828Z",
+    "sentiment": 3
+  },
+  {
+    "id": "SxmCU2LwOzPz5AWOH37AsA",
+    "lat": 48.80675451106911,
+    "lng": 2.1531995175172445,
+    "heading": 68.93308250275139,
+    "pitch": -1.0933448810030768,
+    "zoom": 0.545824106814198,
+    "description": "Stationnement vélo à proximité du parc.",
+    "createdAt": "2026-06-13T15:40:27.397Z",
+    "sentiment": 2
+  },
+  {
+    "id": "g1dl6wZKnfXjciqbFKIBNg",
+    "lat": 48.811596808827396,
+    "lng": 2.1508983779516155,
+    "heading": 6.292548174743896,
+    "pitch": 0.1720385380734939,
+    "zoom": 0.6780943258571623,
+    "description": "Une coupure cycliste majeure, aucun aménagement n'est proposé sur la D182 en direction de la Porte verte.",
+    "createdAt": "2026-06-13T15:41:28.329Z",
+    "sentiment": 5
+  },
+  {
+    "id": "qI8MQWQIeSKfJbGkS35Hyg",
+    "lat": 48.79029284186112,
+    "lng": 2.1242865433794442,
+    "heading": 321.81365433149415,
+    "pitch": -6.905952350397854,
+    "zoom": 0.9838691279712751,
+    "description": "Trottoir cyclable sur cette rampe Saint-Martin.",
+    "createdAt": "2026-06-13T15:43:25.074Z",
+    "sentiment": 3
+  },
+  {
+    "id": "_37nZogRHWIWImeIpalMHQ",
+    "lat": 48.80266450326444,
+    "lng": 2.1455656485454795,
+    "heading": 195.92293891617877,
+    "pitch": -3.894341527423194,
+    "zoom": 1.8275850836844518,
+    "description": "Sas vélo et cédez-le-passage cycliste pour aller tout droit pour les feux destinés à la traversée piétonne.",
+    "createdAt": "2026-06-13T15:44:45.817Z",
+    "sentiment": 2
+  },
+  {
+    "id": "BPNK_-aemwDTb8UEBx3mlQ",
+    "lat": 48.80207052679742,
+    "lng": 2.153128602753863,
+    "heading": 334.5770072152634,
+    "pitch": -3.2460883705974197,
+    "zoom": 1.8275850836844518,
+    "description": "La terminaison de l’aménagement cyclable est maladroite, avec un biseau peu conforme qui peut donner aux automobilistes une lecture erronée de la priorité.",
+    "createdAt": "2026-06-13T15:48:21.751Z",
+    "sentiment": 4
+  },
+  {
+    "id": "4BIlIS5OdBkCmMK33qF6XQ",
+    "lat": 48.803445781311595,
+    "lng": 2.1317965067602844,
+    "heading": 14.643326890903438,
+    "pitch": -1.7556008662257199,
+    "zoom": 1.768610284210035,
+    "description": "Une rue commerçante, animée, ouverte aux cyclistes dans les deux sens de circulation.",
+    "createdAt": "2026-06-13T15:49:06.987Z",
+    "sentiment": 2
+  },
+  {
+    "id": "svQ7dnsMOh3ePbr7PzvBcw",
+    "lat": 48.803855693954034,
+    "lng": 2.1401849562606587,
+    "heading": 253.46438660405585,
+    "pitch": -11.896050611802465,
+    "zoom": 0.23100506680275057,
+    "description": "Sur les hauteurs de Montbrun, un chemin peu connu.",
+    "createdAt": "2026-06-13T15:50:04.087Z",
+    "sentiment": 3
+  },
+  {
+    "id": "oXvFBcC3gao1NxMZdYEqBw",
+    "lat": 48.801632671713996,
+    "lng": 2.1605525967429835,
+    "heading": 103.07748611994452,
+    "pitch": -3.006716463518231,
+    "zoom": 2.54402006902518,
+    "description": "Les bus stationnent longuement à cet endroit et neutralisent complètement la piste cyclable, de façon structurelle.",
+    "createdAt": "2026-06-13T15:51:09.993Z",
+    "sentiment": 4
+  },
+  {
+    "id": "kCmHPNdeJK8W5Qm9UfEpig",
+    "lat": 48.81268458894654,
+    "lng": 2.124153099747176,
+    "heading": 6.279960512027735,
+    "pitch": -11.728905507179604,
+    "zoom": 1.2634160952343725,
+    "description": "Un effort réalisé sur le double sens de circulation cyclable.",
+    "createdAt": "2026-06-13T15:52:06.091Z",
+    "sentiment": 2
+  },
+  {
+    "id": "NgMUTWcWKJ158_0kSpbgXQ",
+    "lat": 48.81239383458237,
+    "lng": 2.1410231074528805,
+    "heading": 320.22218499930466,
+    "pitch": -6.101883325088053,
+    "zoom": 1.4272471596679561,
+    "description": "Des carrefours délaissés.",
+    "createdAt": "2026-06-13T15:52:57.410Z",
+    "sentiment": 4
+  },
+  {
+    "id": "MvY0J35kCyu0MalobNQkSw",
+    "lat": 48.8049816790338,
+    "lng": 2.1359822664238943,
+    "heading": 202.51340668145667,
+    "pitch": -6.310734292788155,
+    "zoom": 1.4192281891198868,
+    "description": "Dans cette configuration, le double sens cyclable paraît difficile.",
+    "createdAt": "2026-06-13T15:53:43.152Z",
+    "sentiment": 3
+  },
+  {
+    "id": "B111lUnZ6vfh0EwMAhwQSQ",
+    "lat": 48.81701155221076,
+    "lng": 2.1504009386404146,
+    "heading": 180.18480853966193,
+    "pitch": -5.127966908897577,
+    "zoom": 2.214255763312962,
+    "description": "\"Des cyclistes ? qu'est-ce que c'est ?\"",
+    "createdAt": "2026-06-13T15:54:57.978Z",
+    "sentiment": 5
+  },
+  {
+    "id": "w16cHmUDBMfew8YGbeiQ8Q",
+    "lat": 48.801526366054574,
+    "lng": 2.133809110941142,
+    "heading": 20.266053969488127,
+    "pitch": -0.9791309725492425,
+    "zoom": 1.493626220055985,
+    "description": "Rues étroite, montée courte mais importante.",
+    "createdAt": "2026-06-13T15:56:41.582Z",
+    "sentiment": 3
+  },
+  {
+    "id": "VJKofJ9cCOLe5amrRiZBkw",
+    "lat": 48.802082112597404,
+    "lng": 2.1254060023992185,
+    "heading": 100.79641077497048,
+    "pitch": -4.956696827188566,
+    "zoom": 0.844648228865278,
+    "description": "Les voies de circulation générale sont conservées. Les cyclistes et les piétons doivent se partager l'espace restant.",
+    "createdAt": "2026-06-13T15:58:31.224Z",
+    "sentiment": 3
+  },
+  {
+    "id": "2sWBtAC0Y8mJ3ESaCv9YFQ",
+    "lat": 48.8009174501063,
+    "lng": 2.1228182796478308,
+    "heading": 255.7926549168985,
+    "pitch": -20.59007495435209,
+    "zoom": 0.16917705277999817,
+    "description": "Etroites rues du vieux Versailles.",
+    "createdAt": "2026-06-13T16:00:00.067Z",
+    "sentiment": 3
+  },
+  {
+    "id": "VHdWXZVYhl6vwxXCAjhJ2w",
+    "lat": 48.79617298851595,
+    "lng": 2.1356897603756355,
+    "heading": 83.09831100616317,
+    "pitch": -5.857035586410802,
+    "zoom": 0.8684959416295115,
+    "description": "Parking 2 roues de la gare des Chantiers.",
+    "createdAt": "2026-06-13T16:02:21.311Z",
+    "sentiment": 2
+  },
+  {
+    "id": "HGpbR6zdayUkeQYM2p844A",
+    "lat": 48.79578754235184,
+    "lng": 2.12552911574265,
+    "heading": 36.261841127436355,
+    "pitch": -7.091089885175393,
+    "zoom": 2.1917939819134755,
+    "description": "Le problème des bandes cyclables non protégées : le stationnement \"juste pour 2 minutes\".",
+    "createdAt": "2026-06-13T16:03:36.247Z",
+    "sentiment": 4
   }
 ]

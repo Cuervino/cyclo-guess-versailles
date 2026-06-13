@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cyclo Guessr — avis VeloVersailles par tonalité</title>
+<style>
+  :root {
+    --bg: #16171d;
+    --panel: #1f2028;
+    --border: #2e303a;
+    --text: #e6e7ea;
+    --muted: #9ca3af;
+    --accent: #2563eb;
+
+    /* Likert scale: 5 tonalities, ordered very positive -> very negative.
+       Hue carries sentiment, the face carries it again (readable without colour). */
+    --t1: #2ecc71; /* très bon       */
+    --t2: #8bc34a; /* plutôt bon     */
+    --t3: #8fa6c4; /* mitigé / neutre (the current --vv blue-grey) */
+    --t4: #f0a500; /* plutôt mauvais */
+    --t5: #e5533c; /* très mauvais   */
+
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    padding: 32px clamp(16px, 4vw, 56px) 80px;
+    line-height: 1.5;
+  }
+  h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -0.4px; }
+  .sub { color: var(--muted); max-width: 720px; margin: 0 0 28px; font-size: 15px; }
+  h2 {
+    font-size: 18px;
+    margin: 40px 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2 .num {
+    display: inline-grid;
+    place-items: center;
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+  }
+  .prop-note { color: var(--muted); margin: 0 0 16px; font-size: 14px; max-width: 760px; }
+
+  /* ---- scale legend ------------------------------------------------------ */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 8px;
+  }
+  .legend .lg {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    font-size: 13px;
+  }
+  .legend .face { font-size: 18px; line-height: 1; }
+  .legend .swatch {
+    width: 12px; height: 12px; border-radius: 50%;
+  }
+
+  /* ---- card row ---------------------------------------------------------- */
+  .row {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 4px 0 14px;
+    scroll-snap-type: x proximity;
+  }
+  .card {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .map {
+    height: 120px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    background:
+      repeating-linear-gradient(45deg, #23252f 0 12px, #1c1e26 12px 24px);
+    display: grid;
+    place-items: center;
+    color: #51545f;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .head strong { font-size: 20px; }
+  .head span { color: var(--muted); font-size: 14px; }
+  .next {
+    width: 100%;
+    margin-top: 14px;
+    border: none;
+    border-radius: 10px;
+    padding: 11px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    cursor: pointer;
+  }
+
+  /* =======================================================================
+     PROPOSITION 1 — tinted callout (the whole block takes the tonality hue)
+     ======================================================================= */
+  .p1 {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--tone) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--tone) 28%, transparent);
+    border-left: 3px solid var(--tone);
+  }
+  .p1 .label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tone);
+  }
+  .p1 .label .face { font-size: 18px; }
+  .p1 p { margin: 0; font-size: 14px; }
+
+  /* =======================================================================
+     PROPOSITION 2 — neutral callout + coloured tonality badge on top
+     ======================================================================= */
+  .p2 {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+  }
+  .p2 .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    padding: 4px 10px 4px 6px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--tone);
+    background: color-mix(in srgb, var(--tone) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent);
+  }
+  .p2 .badge .face { font-size: 15px; }
+  .p2 .vv-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: none;
+    margin-bottom: 4px;
+  }
+  .p2 p { margin: 0; font-size: 14px; }
+
+  /* =======================================================================
+     PROPOSITION 3 — emoji medallion on the left, text on the right
+     ======================================================================= */
+  .p3 {
+    margin: 0;
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--tone) 9%, transparent);
+    border: 1px solid color-mix(in srgb, var(--tone) 24%, transparent);
+  }
+  .p3 .medallion {
+    flex: 0 0 auto;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    background: color-mix(in srgb, var(--tone) 22%, transparent);
+    border: 1px solid color-mix(in srgb, var(--tone) 45%, transparent);
+  }
+  .p3 .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tone);
+    margin-bottom: 3px;
+  }
+  .p3 p { margin: 0; font-size: 14px; }
+</style>
+</head>
+<body>
+  <h1>Avis VeloVersailles — code couleur par tonalité</h1>
+  <p class="sub">
+    L'app affiche aujourd'hui un encart neutre. Ici je décline une échelle de
+    type Likert à 5 niveaux (très bon, plutôt bon, mitigé, plutôt mauvais, très
+    mauvais), avec une couleur et un visage par tonalité. Le niveau central
+    « mitigé » sert de neutre / interrogation. Trois layouts proposés, chacun
+    montré sur les 5 tonalités. Choisis le layout, puis on affine couleurs et
+    libellés.
+  </p>
+
+  <div class="legend" id="legend"></div>
+
+  <!-- Propositions are rendered by the script below from a single data model,
+       so the five cards of each proposition stay perfectly consistent. -->
+  <section>
+    <h2><span class="num">1</span> Encart entièrement teinté</h2>
+    <p class="prop-note">
+      Le bloc complet prend la teinte de la tonalité (fond, bordure, bordure
+      gauche épaisse), visage à côté du libellé. Lecture instantanée, le plus
+      affirmé visuellement. Risque : très coloré si beaucoup d'avis négatifs.
+    </p>
+    <div class="row" data-prop="1"></div>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span> Encart neutre + pastille de tonalité</h2>
+    <p class="prop-note">
+      L'encart reste sobre (gris), seule une petite pastille colorée en haut
+      porte le visage et le libellé de tonalité. Plus discret, garde la carte
+      calme, le sentiment reste clairement signalé sans dominer.
+    </p>
+    <div class="row" data-prop="2"></div>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span> Médaillon emoji à gauche</h2>
+    <p class="prop-note">
+      Un grand visage dans une pastille ronde à gauche, le texte à droite, fond
+      légèrement teinté. Le visage devient l'accroche, très lisible d'un coup
+      d'œil, registre un peu plus ludique.
+    </p>
+    <div class="row" data-prop="3"></div>
+  </section>
+
+<script>
+  const TONES = [
+    { key: "t1", face: "😀", label: "Très bon",       color: "var(--t1)",
+      text: "Piste large, bien séparée de la circulation et continue jusqu'au carrefour. Exactement ce qu'on aimerait voir partout." },
+    { key: "t2", face: "🙂", label: "Plutôt bon",     color: "var(--t2)",
+      text: "Aménagement correct, lisible et utilisable au quotidien. Quelques détails à fignoler, rien de bloquant." },
+    { key: "t3", face: "😐", label: "Mitigé",         color: "var(--t3)",
+      text: "Avis partagé : la piste existe mais s'interrompt par endroits. Praticable à condition de rester vigilant." },
+    { key: "t4", face: "🙁", label: "Plutôt mauvais", color: "var(--t4)",
+      text: "Marquage au sol effacé et stationnement sauvage fréquent. On se retrouve vite mêlé aux voitures." },
+    { key: "t5", face: "😡", label: "Très mauvais",   color: "var(--t5)",
+      text: "Bande cyclable qui disparaît en plein carrefour, sans alternative. Configuration dangereuse, à éviter." },
+  ];
+
+  // Sample score per tonality (better guesses tend to land on the clearer spots).
+  const SCORES = ["4 820", "3 950", "2 470", "1 680", "920"];
+  const DIST   = ["31 m", "74 m", "180 m", "260 m", "410 m"];
+
+  // ---- legend -------------------------------------------------------------
+  document.getElementById("legend").innerHTML = TONES.map(t => `
+    <span class="lg">
+      <span class="face">${t.face}</span>
+      <span class="swatch" style="background:${t.color}"></span>
+      ${t.label}
+    </span>`).join("");
+
+  // ---- callout renderers per proposition ---------------------------------
+  const renderers = {
+    1: t => `
+      <div class="p1" style="--tone:${t.color}">
+        <div class="label"><span class="face">${t.face}</span> Avis VeloVersailles · ${t.label}</div>
+        <p>${t.text}</p>
+      </div>`,
+    2: t => `
+      <div class="p2" style="--tone:${t.color}">
+        <span class="badge"><span class="face">${t.face}</span> ${t.label}</span>
+        <div class="vv-label">Avis VeloVersailles</div>
+        <p>${t.text}</p>
+      </div>`,
+    3: t => `
+      <div class="p3" style="--tone:${t.color}">
+        <div class="medallion">${t.face}</div>
+        <div>
+          <div class="label">Avis VeloVersailles · ${t.label}</div>
+          <p>${t.text}</p>
+        </div>
+      </div>`,
+  };
+
+  document.querySelectorAll(".row").forEach(row => {
+    const prop = row.dataset.prop;
+    row.innerHTML = TONES.map((t, i) => `
+      <div class="card">
+        <div class="map">carte du résultat</div>
+        <div class="head"><strong>${SCORES[i]} points</strong><span>à ${DIST[i]} du lieu</span></div>
+        ${renderers[prop](t)}
+        <button class="next">Manche suivante →</button>
+      </div>`).join("");
+  });
+</script>
+
+<!-- Chosen: __ (layout) -->
+</body>
+</html>
