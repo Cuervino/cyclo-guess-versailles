@@ -15,6 +15,9 @@ dist-ssr
 # Local backup files (created during edits, not for the public repo)
 *.bak
 
+# Private working notes — kept local, never published
+CLAUDE.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
